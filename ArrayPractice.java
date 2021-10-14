@@ -2,7 +2,7 @@ public class ArrayPractice{
 	public static void main(String[] args){
 
        String[] s = {"First", "Second", "Middle", "Penultimate","Last"};
-       System.out.println("First Array:\n");
+       System.out.println("Initial Array:\n");
        for(int i = 0; i<s.length;i++){
             System.out.println(s[i]);
        }
