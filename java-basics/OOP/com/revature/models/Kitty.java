@@ -32,4 +32,10 @@ public class Kitty{
         System.out.println("Zzzzzzzzzz");
     }
 
+    public void baby(){
+        if(this.isKitten == true){
+            System.out.println("I'm a baby.");
+        }
+    }
+
 }

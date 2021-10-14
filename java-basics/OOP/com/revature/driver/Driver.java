@@ -12,15 +12,18 @@ public class Driver{
         Kitty tigerlily = new Kitty();
         tigerlily.isOutdoor = false;
         tigerlily.furColor = "Tabby";
-        tigerlily.isKitten = false;
+        tigerlily.isKitten = true;
         tigerlily.name = "Tigerlily";
 
 
+        System.out.println(celeste.name + ":");
         System.out.println(celeste.hunting());
         celeste.sleep();
+        celeste.baby();
 
+        System.out.println("\n"+ tigerlily.name + ":");
         System.out.println(tigerlily.hunting());
         tigerlily.sleep();
-
+        tigerlily.baby();
     }
 }
