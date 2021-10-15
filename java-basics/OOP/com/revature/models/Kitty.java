@@ -22,7 +22,7 @@ public class Kitty{
 
     public String hunting(){
         if(this.isOutdoor == true){
-            return "I'm hunting chipmunks";
+            return "I'm chasing chipmunks";
         } else{
             return "I'm chasing laser pointers";
         }
