@@ -1,0 +1,23 @@
+Go line by line, and explain what's happening in each line.
+
+int score = 80; 			// A variable of type int and of name score is declared and is assigned a value of 80;
+
+String result; 				// Initilizing a string but not yet assigning it.
+
+if (score == 80) {			//opening line of an if-else statement. 
+					//Compares the value of score to 80 and returns a boolean. 
+					//In this case it will return 'true' so this portion of the if statement will run.
+	result = "You passed!";  	//result is redefined to be the string "You passed!"
+} else if (score > 80) {		//If score is not equal to 80, this section of the if statement will then be evaluated. 
+					//It now compares the value of score to 80 and if it is greater it returns the 
+					//boolean 'true' so it would only run if score is greater than 80.
+	result = "You did great!";	//If this portion of the if-else statement runs it will assign 
+					/result to the string "You did great!".
+} else {				//if neither of the previous if statements is true, 
+					//(score is not equal to or greater than 80) this section of the code will now run.
+	result = "You did not pass. Try again!"; 
+					//If this portion of the if-else statement runs it will assign the string "You did
+					//not pass. Try again!" to result. 
+}
+
+System.out.println(result);		//Prints out at the command line the string that is now assigned to result.
