@@ -12,7 +12,12 @@ public static void main(String[] args) {		//This line calls the main method in w
 							//and then initilized with the array of strings returned by the method on the right.
 	
 	for (String food : foodsOfMyType) {		//This for loop will loop through each entry in the array of strings foodsOfMyType
-							//and print out each string in the array on a separate line. 
+							//and print out each string in the array on a separate line. Because the string 
+							//associated with the variable myType is "Dinner", the array that prints in this case
+							// will print out 
+							//curry
+							//stir fry
+							//burger 
 		System.out.println(food);
 	}
 }							//This closes the main method. 
