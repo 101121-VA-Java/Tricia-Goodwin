@@ -1,0 +1,77 @@
+public static void main(String[] args) {		//This line calls the main method in which all of the code to run is placed.
+							// And outside of which additional methods can be defined. It is static so that
+							//the main method can be run without an object being created on which to call the method.
+	String[] foodTypes = getFoodTypes();		//This line first calls the method getFoodTypes and assigns the resulting
+							//array of strings to foodTypes. 
+	String myType = foodTypes[2];			//This line finds the third entry in the array from the previous line
+							// and the initilized the reference type variable myType to refer to that string.
+							//In this case it will be the string "dinner".
+	String[] foodsOfMyType = getFoodsByType(myType);//This line first calls the method getFoodsByType to return the types of food 
+							//associated with the string referenced by the variable myType. The return type for
+							//this method is an array of strings, so the string array foodsOfMyType is created
+							//and then initilized with the array of strings returned by the method on the right.
+	
+	for (String food : foodsOfMyType) {		//This for loop will loop through each entry in the array of strings foodsOfMyType
+							//and print out each string in the array on a separate line. 
+		System.out.println(food);
+	}
+}							//This closes the main method. 
+
+
+public static String[] getFoodTypes() {			//This line defines a new method getFoodTypes. It has no arguments and returns a 
+							//string array. 
+	String[] foodTypes = {"breakfast","lunch","dinner","dessert","snack"}; //This initilizes a new string array foodTypes which contains 
+							//5 entries.
+	return foodTypes;				//This returns the string array foodTypes as the output of the method.
+}							//This closes the method definition.
+							
+public static String[] getFoodsByType(String type) {	//This line begins a new method declaration, getFoodsByType which requires one string
+							//as an arguement and returns an array of strings.
+	String[] foods = new String[3];			//This creates a new string array of length 3 that is not yet initilized.
+
+	switch(type) {					//This begins a switch statement, dependent on the string argument inputed when the method was called.
+	case "breakfast":				//Evaluates if "breakfast" and the string associated with type are the same. If so the next lines of 
+							//will run. If not the next case will be evaluated.
+		foods[0] = "pancakes";			//This assigns the first string in the array foods to be the string "pancakes".
+		foods[1] = "cereal";			//This assigns the second string in the array foods to be the string "cereal".
+		foods[2] = "omelette";			//This assigns the third string in the array foods to be the string "omelette".
+		break;					//This break statement will skip the remaining cases and move to the end of the switch statement.
+	
+	case "lunch":					//Evaluates if "lunch" and the string associated with type are the same. If so the next lines of 
+							//will run. If not the next case will be evaluated.
+		foods[0] = "sandwich";			//This assigns the first string in the array foods to be the string "sandwich".
+		foods[1] = "salad";			//This assigns the second string in the array foods to be the string "salad".
+		foods[2] = "soup";			//This assigns the third string in the array foods to be the string "soup".
+		break;					//This break statement will skip the remaining cases and move to the end of the switch statement.
+	
+	case "dinner":					//Evaluates if "dinner" and the string associated with type are the same. If so the next lines of 
+							//will run. If not the next case will be evaluated.
+		foods[0] = "curry";			//This assigns the first string in the array foods to be the string "curry".
+		foods[1] = "stir fry";			//This assigns the second string in the array foods to be the string "stir fry".
+		foods[2] = "burger";			//This assigns the third string in the array foods to be the string "burger".
+		break;					//This break statement will skip the remaining cases and move to the end of the switch statement.
+	
+	case "dessert":					//Evaluates if "dessert" and the string associated with type are the same. If so the next lines of 
+							//will run. If not the next case will be evaluated.
+		foods[0] = "cake";			//This assigns the first string in the array foods to be the string "cake".
+		foods[1] = "ice cream";			//This assigns the second string in the array foods to be the string "ice cream".
+		foods[2] = "candy";			//This assigns the third string in the array foods to be the string "candy".
+		break;					//This break statement will skip the remaining cases and move to the end of the switch statement.
+	
+	case "snack":					//Evaluates if "snack" and the string associated with type are the same. If so the next lines of 
+							//will run. If not the next case will be evaluated.
+		foods[0] = "chips";			//This assigns the first string in the array foods to be the string "chips".
+		foods[1] = "apple";			//This assigns the second string in the array foods to be the string "apple".
+		foods[2] = "samosa";			//This assigns the third string in the array foods to be the string "samosa".
+		break;					//This break statement will skip the remaining cases and move to the end of the switch statement.
+	
+	default:					//If no case before has been run, the default case will now run.
+		// add your own
+		System.out.println("Invalid input");	//This line will print out "Invalid input" if the default case is run, and since the strings in the
+							//array are not being assigned, the array foods will have 3 enties, all of which will be null.
+		break;					//This break statement will skip any remaining lines of code between it and the end of the
+							//switch statement, which in this case is nothing. 
+	}						//End of the switch statement. Any break statements within the switch will skip the code between them and this point.
+
+	return foods;					//This will return the array foods, with any changes made to it from the switch statement, as the output of the method.
+}							//This is the end of the method declaration of getFoodsByType. 
