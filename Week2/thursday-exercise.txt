@@ -32,7 +32,7 @@ public static String[] getFoodTypes() {			//This line defines a new method getFo
 							
 public static String[] getFoodsByType(String type) {	//This line begins a new method declaration, getFoodsByType which requires one string
 							//as an arguement and returns an array of strings.
-	String[] foods = new String[3];			//This creates a new string array of length 3 that is not yet initilized.
+	String[] foods = new String[3];			//This creates a new string array of length 3 that is initilized with default values, in this case all entries will be null until assigned otherwise..
 
 	switch(type) {					//This begins a switch statement, dependent on the string argument inputed when the method was called.
 	case "breakfast":				//Evaluates if "breakfast" and the string associated with type are the same. If so the next lines of 
