@@ -14,19 +14,19 @@ public class Calculator {
 	 *	- isPrime: checks if a number is Prime
 	 */
 	
-	public double add(double x, double y) {
+	public static double add(double x, double y) {
 		return x+y;
 	}
 	
-	public double subtract(double x, double y) {
+	public static double subtract(double x, double y) {
 		return x-y;
 	}
 	
-	public double multiply(double x, double y) {
+	public static double multiply(double x, double y) {
 		return x*y;
 	}
 	
-	public double divide(double x, double y) {
+	public static double divide(double x, double y) {
 		
 		if (y == 0) {
 			throw new CalculatorException("Dividing by Zero is not allowed.");
@@ -36,7 +36,7 @@ public class Calculator {
 		
 	}
 	
-	public boolean isPrime(int i) {
+	public static boolean isPrime(int i) {
 		boolean ans = false;
 		if(i==0||i==1) {
 			ans = false;
@@ -54,5 +54,17 @@ public class Calculator {
 		}
 		return ans;
 	}
+public static void main(String[] Args){
+	int a = 1;
+	int b = 2;
+	int c = 0;
+	
+	System.out.println(add(a,b));
+	System.out.println(subtract(b,a));
+	System.out.println(multiply(a,b));
 
+	System.out.println(isPrime(9));
+	System.out.println(divide(b,c));
+	
+}
 }

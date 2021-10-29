@@ -19,7 +19,7 @@ public class Books{
         return this.title + "\nby "+this.author;
     }
 
-    public boolean sell(){
+    public boolean canSell(){
         if( this.released && this.stock > 0){
             System.out.println("This book can be sold. \nIt costs $"+ this.price);
             return true;

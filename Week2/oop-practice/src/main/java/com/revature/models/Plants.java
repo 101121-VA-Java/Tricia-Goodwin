@@ -1,6 +1,6 @@
 package com.revature.models;
 
-public abstract class Plants {
+public abstract class Plants implements WaterPlants{
 	private String type;
 	protected boolean needsWatered;
 	private int daysToNeedWatering;

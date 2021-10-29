@@ -26,6 +26,19 @@ public class Books{
 		this.hardcover = hardcover;
 		this.nytbestseller = nytbestseller;
 	}
+    public Books(String title, String author, long isbn, boolean released, int stock, String genre, double price,
+			boolean hardcover) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.released = released;
+		this.stock = stock;
+		this.genre = genre;
+		this.price = price;
+		this.hardcover = hardcover;
+		this.nytbestseller = false;
+	}
 
 	public Books(String title, String author){
         this.title = title;

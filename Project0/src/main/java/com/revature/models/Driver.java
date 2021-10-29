@@ -1,17 +1,13 @@
 package com.revature.models;
 
-import com.revature.controllers.RegistrationController;
-
+import com.revature.controllers.FrontController;
 
 public class Driver {
-	
-	RegistrationController rc = new RegistrationController();
-		
-		
-		
-		
-		
 
-	
+	public static void main(String[] args) {
+
+		FrontController.firstMenu();
+		
+	}
 
 }

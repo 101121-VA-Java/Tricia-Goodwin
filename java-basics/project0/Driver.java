@@ -42,29 +42,29 @@ public class Driver{
 
 
         System.out.println(b.info()+"\n");
-        if(b.sell()){
+        if(b.canSell()){
             System.out.println(b.location()+"\n");
         }
         
         System.out.println(b1.info()+"\n");
-        if(b1.sell()){
+        if(b1.canSell()){
             System.out.println(b1.location()+"\n");
         }
 
         System.out.println(b2.info()+"\n");
-        if(b2.sell()){
+        if(b2.canSell()){
             System.out.println(b2.location()+"\n");
         }
 
 
         System.out.println(b3.info()+"\n");
-        if(b3.sell()){
+        if(b3.canSell()){
             System.out.println(b3.location()+"\n");
         }
 
 
         System.out.println(b4.info()+"\n");
-        if(b4.sell()){
+        if(b4.canSell()){
             System.out.println(b4.location()+"\n");
         }
 
