@@ -85,4 +85,10 @@ public class UserArray implements UserDao {
 
 	}
 
+	@Override
+	public User addUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

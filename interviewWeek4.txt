@@ -1,0 +1,15 @@
+Malolan/David/Tricia
+
+1. David -
+	- What is an enhanced for loop? (.75)
+		-(condition1:condition2) ?? not the correct wording.
+		-A few uhhs, but not badly. 
+		-Took a roundabout way to get to the answer but got there and gave a good answer.
+	
+	- What is TDD? (1)
+		-said umm noticably more
+		-good answer, fully answered the question and answered confidently.
+
+	-What is the default MAVEN lifecycle? (.25)
+		-tech difficulties while asking the question, reacted well to it and asking for the question to be repeated.
+		-good explaination of how to create a MAVEN project, didn't answer the question. 
