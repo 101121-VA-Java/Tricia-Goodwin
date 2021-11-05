@@ -2,11 +2,13 @@ package com.revature.controllers;
 
 import java.util.Scanner;
 
+import com.revature.repositories.BooksScanner;
+
 public class FrontController {
 
 	public static void firstMenu() {
 
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = BooksScanner.getScanner();
 
 			boolean exit = false;
 			
@@ -33,7 +35,7 @@ public class FrontController {
 					break;
 				}
 
-				sc.close();
+
 			}
 
 

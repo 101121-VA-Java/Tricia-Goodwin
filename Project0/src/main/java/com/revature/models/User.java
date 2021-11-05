@@ -2,12 +2,24 @@ package com.revature.models;
 
 public class User {
 	
+	private String fname;
+	private String lname;
 	private int id;
 	private String username;
-	//private Role role;
 	private String role;
 	private String password;
 	protected static int numOfUsers;
+	
+	
+	
+	
+	public User(String fname, String lname, String username, String password) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.password = password;
+	}
 	
 	
 	public int getId() {
@@ -22,12 +34,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-//	public Role getRole() {
-//		return role;
-//	}
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
+
 	public String getRole() {
 		return role;
 	}
@@ -54,19 +61,23 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", role=" + role + "]";
 	}
-	//	public User(String username,String role, String password) {
-//		super();
-//		this.username = username;
-//		this.password = password;
-//		this.role = role;
-//		numOfUsers++;
-//		this.id = 12345+numOfUsers;
-//		
-//	}
+
 	public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getLname() {
+		return lname;
+	}
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 	
 	

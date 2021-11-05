@@ -9,8 +9,16 @@ public class Customer extends User {
 		super(username, password);
 		this.setRole("CUSTOMER");
 		numOfUsers++;
-		this.setId(56789+numOfUsers);
+
 
 	}
+
+	public Customer(String fname, String lname, String username, String password) {
+		super(fname, lname, username, password);
+		this.setRole("CUSTOMER");
+		numOfUsers++;
+	}
+	
+	
 
 }

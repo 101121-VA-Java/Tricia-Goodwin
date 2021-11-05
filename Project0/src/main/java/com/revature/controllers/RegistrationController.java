@@ -5,65 +5,70 @@ import java.util.Scanner;
 import com.revature.models.Bookseller;
 import com.revature.models.Customer;
 import com.revature.models.User;
+import com.revature.repositories.BooksScanner;
 
 public class RegistrationController {
-	User[] users = {new Bookseller("Tricia","password")};
+	
 
 	public static void newUser() {
 
-		Scanner scnu = new Scanner(System.in);
+		Scanner sc = BooksScanner.getScanner();
 
 		System.out.println("Create a New User.");
-		System.out.println("Is new user an employee? ");
-		String yn = scnu.nextLine();
+
 		System.out.println("Enter a username:");
-		String username = scnu.nextLine();
+		String username = sc.nextLine();
 		System.out.println("Enter a password:");
-		String password = scnu.nextLine();
+		String password = sc.nextLine();
+		System.out.println("Enter your first name: ");
+		String fname = sc.nextLine();
+		System.out.println("Enter your last name: ");
+		String lname = sc.nextLine();
 
-		switch (yn) {
-		case "yes":
-		case "y":
-		case "Yes":
-		case "Y":
 
-			User p = new Bookseller(username, password);
+
+			User p1 = new Customer(fname, lname, username, password);
 			// TODO: Ensure that username is not already in use
-			System.out.println(p.toString());
-			break;
-
-		default:
-
-			User p1 = new Customer(username, password);
-			// TODO: Ensure that username is not already in use
+			
 			System.out.println(p1.toString());
-			break;
 
-		}
 
-		scnu.close();
+
+		
 
 	}
 
 	public static void logIn() {
-		Scanner scli = new Scanner(System.in);
+		Scanner sc = BooksScanner.getScanner();
 
 		System.out.println("Enter your username:");
-		String username = scli.nextLine();
+		String username = sc.nextLine();
 		System.out.println("Enter your password:");
-		String password = scli.nextLine();
+		String password = sc.nextLine();
 		
 		if(findUser(username)) {
 			User u = retrieveUser(username);
 		}else {
 			System.out.println("Invalid password or user name");
-			logIn();		}
-		User u = findUser(username);
+			System.out.println("Try again or return to last menu?");
+			System.out.println("1. Try again");
+			System.out.println("2. Return to previous menu");
+			
+			int choice = sc.nextInt();
+			if(choice == 1) {
+				logIn();		
+			} else {
+				FrontController.firstMenu();
+			}
+		}
+		User u = retrieveUser(username);
 		
 		if(u.getPassword().equals(password)) {
 			System.out.println("Log in complete.");
-			if(u.getRole().equals("ADMIN")||u.getRole().equals("OWNER")) {
+			if(u.getRole().equals("ADMIN")){
 				BackController.EmployeeMenu();
+			}else if(u.getRole().equals("OWNER")) {
+				BackController.OwnerMenu();
 			}else {
 				BackController.CustomerMenu();
 			}
@@ -74,7 +79,17 @@ public class RegistrationController {
 		
 		
 
-		scli.close();
+
+	}
+
+	private static User retrieveUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static boolean findUser(String username) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

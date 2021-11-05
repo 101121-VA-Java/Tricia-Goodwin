@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
+import java.util.List;
+
 import com.revature.models.Books;
 
 public interface BooksDao {
@@ -7,13 +9,17 @@ public interface BooksDao {
 	//Employee[] getAllEmployees();
 	//Employee getEmployeeById(int id);
 	
-	Books[] getAllBooks();
+	List<Books> getAllBooks();
 	
 	Books getBookByTitle(String title);
-	Books getBookByISBN(int isbn);
+	Books getBookByISBN(long isbn);
 	long addBook(Books b);
-	String findBook(int isbn);
+	String findBook(long isbn);
 	String findBook(String title);
+
+	List<Books> getAllBooksByAuthor();
+
+	List<Books> getAllBooksByGenre();
 	
 	
 

@@ -1,4 +1,6 @@
 package com.revature.repositories;
+import java.util.List;
+
 import com.revature.models.Books;
 
 public class BookArray implements BooksDao{
@@ -28,12 +30,12 @@ public class BookArray implements BooksDao{
 		}
 		temp[i] = book;
 		
-		return book.isbn;
+		return book.getIsbn();
 	}
 
 
 	@Override
-	public Books[] getAllBooks() {
+	public List<Books> getAllBooks() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -53,8 +55,9 @@ public class BookArray implements BooksDao{
 	}
 
 
+	
 	@Override
-	public String findBook(int isbn) {
+	public String findBook(long isbn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,6 +65,22 @@ public class BookArray implements BooksDao{
 
 	@Override
 	public String findBook(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Books getBookByISBN(long isbn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public String findBook(long isbn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

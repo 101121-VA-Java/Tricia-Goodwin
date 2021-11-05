@@ -2,15 +2,15 @@ package com.revature.models;
 
 public class Books{
 
-    public String title;
-    public String author;
-    public long isbn;
-    public boolean released;
-    public int stock;
-    public String genre;
-    public double price;
-    public boolean hardcover;
-    public boolean nytbestseller;
+    private String title;
+    private String author;
+    private long isbn;
+    private boolean released;
+    private int stock;
+    private String genre;
+    private double price;
+    private boolean hardcover;
+    private boolean nytbestseller;
     
 
     public Books(String title, String author, long isbn, boolean released, int stock, String genre, double price,
@@ -52,9 +52,66 @@ public class Books{
 		this.author = author;
 		this.isbn = l;
 	}
+    
+    
+    
 
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public long getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(long isbn) {
+		this.isbn = isbn;
+	}
+	public boolean isReleased() {
+		return released;
+	}
+	public void setReleased(boolean released) {
+		this.released = released;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public boolean isHardcover() {
+		return hardcover;
+	}
+	public void setHardcover(boolean hardcover) {
+		this.hardcover = hardcover;
+	}
+	public boolean isNytbestseller() {
+		return nytbestseller;
+	}
+	public void setNytbestseller(boolean nytbestseller) {
+		this.nytbestseller = nytbestseller;
+	}
 	public String info(){
-        return this.title + "\nby "+this.author;
+        return this.title + "\nby "+this.author +"\b"+this.genre;
     }
 
     public boolean canSell(){
