@@ -31,6 +31,18 @@ public interface BooksDao {
 
 	boolean deleteBook(Long isbn);
 
+	boolean updateBook(long isbn);
+
+	void seeMyBooks(int iD);
+
+	void seeMyOffers(int iD);
+
+	void seePendingOffers();
+
+	void acceptOffer(int cID, long isbnO);
+
+	void seeAcceptedOffers();
+
 	
 	
 

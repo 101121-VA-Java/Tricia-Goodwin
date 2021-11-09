@@ -154,7 +154,6 @@ public class UsersPostgres implements UserDao{
 				String fname = rs.getString("bs_fname");
 				String lname = rs.getString("bs_lname");
 				username = rs.getString("bs_username");
-				String role = rs.getString("bs_role");
 				String password = rs.getString("bs_password");
 				double hrly = rs.getDouble("bs_hrly");
 				

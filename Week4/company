@@ -10,27 +10,10 @@ create table if not exists books(
 	b_genre varchar(50),
 	b_price decimal(4,2),
 	b_hardcover boolean,
-	b_nytb boolean
+	b_nytb boolean,
 );
-insert into books ()
-drop table if exists tasks;
-create table if not exists tasks(
-	/*
-	 * id
-	 * name
-	 * description
-	 * completion_status
-	 * due_date
-	 * employee
-	 */
-	id serial primary key,
-	t_name varchar(20),
-	t_description text,
-	t_completion_status varchar(10),
-	t_assign_date date default current_date,
-	t_due_date date,
-	t_assigned_emp integer references employees(e_id)
-);
+
+
 
 insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Big Heat, The', 'Vasilyonok', 316002186, true, 8, 'Drama', 17.88, false, false);
 insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Beloved', 'Duker', 243494307, true, 25, 'Drama', 15.43, true, false);
@@ -69,7 +52,8 @@ create table if not exists Booksellers(
 	bs_username varchar(20) unique,
 	bs_role varchar(15),
 	bs_password varchar(20),
-	bs_hrly decimal(4,2)
+	bs_hrly decimal(4,2),
+
 );
 
 
@@ -124,7 +108,9 @@ delete from customers where c_id > 10;
 drop table if exists BooksOwned;
 create table if not exists BooksOwned(
 	c_id int,
-	isbn int
+	isbn int,
+	foreign key(customers.c_id)
+		references customers(c_id)
 );
 
 
@@ -137,6 +123,22 @@ create table if not exists Offers(
 	
 );
 
+drop table if exists Transactions;
+create table if not exists transaction(
+
+	t_id serial primary key,
+	c_id varchar(20),
+	c_lname varchar(20),
+	c_username varchar(20) unique,
+	c_role varchar(15),
+	c_password varchar(20),
+	c_books int
+);
+
 insert into offers (c_id, isbn, accepted, payed) values (3, 103116829, false, false);
+insert into booksowned (c_id, isbn) values(11, 103116829) ;
+insert into booksowned (c_id, isbn) values(11, 243494307) ;
+insert into booksowned (c_id, isbn) values(11, 674303198) ;
 
-
+select * from offers where c_id = 11 AND isbn = 553418026;
+Update Books set b_stock = (b_stock-1)  where b_isbn =643858616;

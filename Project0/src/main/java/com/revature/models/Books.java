@@ -144,7 +144,7 @@ public class Books{
 
 	@Override
 	public String toString() {
-		return "Books [title=" + title + ", author=" + author + ", price=" + price + "]";
+		return "Books [title=" + title + ", author=" + author + ", price=" + price + ", + " + isbn + " ]";
 	}
 
 

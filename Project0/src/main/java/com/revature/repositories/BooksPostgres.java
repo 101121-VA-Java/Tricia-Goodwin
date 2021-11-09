@@ -2,7 +2,6 @@ package com.revature.repositories;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.models.Books;
-import com.revature.models.Bookseller;
-import com.revature.models.User;
+import com.revature.models.Offer;
 import com.revature.util.ConnectionUtil;
-import com.revature.repositories.BooksScanner;
 
 
 public class BooksPostgres implements BooksDao {
+	
+	static Scanner sc = BooksScanner.getScanner();
 
 	//@Override
 	public List<Books> getAllBooks() {
@@ -345,6 +344,7 @@ public class BooksPostgres implements BooksDao {
 	@Override
 	public boolean offerBook(int Cust_id, long isbn) {
 		boolean executed = false;
+		if(getBookByISBN(isbn).canSell()) {
 		String sql = "insert into offers (c_id, isbn, accepted, payed)"
 				+ "values (?, ?, ?, ?);";
 		
@@ -357,13 +357,18 @@ public class BooksPostgres implements BooksDao {
 			ps.setBoolean(3, false);
 			ps.setBoolean(4, false);
 			
-			executed = ps.execute();
+			ps.execute();
+			executed = true;
 			
 
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
-		return executed;
+			return executed;
+		}else {
+			System.out.println("I'm Sorry, that book is not available");
+			return false;
+		}
 	}
 
 	
@@ -420,7 +425,6 @@ public class BooksPostgres implements BooksDao {
 
 	@Override
 	public void listGenres() {
-		// TODO Auto-generated method stub
 		String sql = "select b_genre from books;";
 		LinkedHashSet <String> genres = new LinkedHashSet<>();
 
@@ -463,7 +467,7 @@ public class BooksPostgres implements BooksDao {
 
 	@Override
 	public boolean deleteBook(Long isbn) {
-		// TODO Auto-generated method stub
+
 		boolean found = false;
 		String sql = "delete from books where b_isbn = ? ;";
 
@@ -482,6 +486,298 @@ public class BooksPostgres implements BooksDao {
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
-		return found;	}
+		return found;	
+		}
+	
+	
+	
+	@Override
+	public boolean updateBook(long isbn) {
+
+		boolean updated = false;
+
+		String sql;
+		System.out.println("Update Book:");
+		System.out.println("1. Price");
+		System.out.println("2. Stock");
+		System.out.println("3. Leave unchanged");
+		String choice = sc.nextLine();
+		switch(choice) {
+		case "1":
+			System.out.println("Enter new price: ");
+			double price = sc.nextDouble();
+			sc.nextLine();
+			sql = "Update Books set b_price = ?  where b_isbn = ? ;";
+			
+			try (Connection con = 
+					ConnectionUtil.getConnectionFromFile()) {
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				ps.setDouble(1,price);
+				ps.setLong(2, isbn);
+				ps.execute();
+			
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+			break;
+		case "2":
+			System.out.println("Enter new stock: ");
+			double stock = sc.nextInt();
+			sc.nextLine();
+			sql = "Update Books set b_stock = ?  where b_isbn = ? ;";
+			
+			try (Connection con = 
+					ConnectionUtil.getConnectionFromFile()) {
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				ps.setDouble(1,stock);
+				ps.setLong(2, isbn);
+				ps.execute();
+			
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		case "3":
+			
+			break;
+		default:
+			System.out.println("Choice not registered");
+		}
+		
+		return updated;
+		
+	}
+	
+	@Override
+	public void seeMyBooks(int ID) {
+		List<Long> myBooks = new ArrayList<Long>();
+		String sql = "select isbn from booksowned where c_id = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1,ID);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+			
+				long isbn = rs.getLong("isbn");
+				myBooks.add(isbn);	
+			}
+			
+			
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(Long book:myBooks) {
+			System.out.println(getBookByISBN(book));
+		}
+		
+		
+		
+	}
+
+	@Override
+	public void seeMyOffers(int ID) {
+		List<Offer> myOffers = new ArrayList<Offer>();
+		String sql = "select * from offers where c_id = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1,ID);
+			
+			ResultSet rs = ps.executeQuery();
+
+				
+				while(rs.next()) {
+					int id = rs.getInt("c_id");
+					long isbn = rs.getLong("isbn");
+					boolean accepted = rs.getBoolean("accepted");
+					boolean payed = rs.getBoolean("payed");
+					
+
+
+					Offer newOffer = new Offer(id, isbn, accepted, payed);
+					myOffers.add(newOffer);
+				}
+
+				
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
+			} 
+			
+
+		
+		for(Offer offer:myOffers) {
+			System.out.println(offer);
+		}
+		
+	}
+
+	
+	@Override
+	public void seePendingOffers() {
+		List<Offer> allOffers = new ArrayList<Offer>();
+		String sql = "select * from offers where accepted = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setBoolean(1,false);
+			
+			ResultSet rs = ps.executeQuery();
+
+				
+				while(rs.next()) {
+					int id = rs.getInt("c_id");
+					long isbn = rs.getLong("isbn");
+					boolean accepted = rs.getBoolean("accepted");
+					boolean payed = rs.getBoolean("payed");
+					
+
+
+					Offer newOffer = new Offer(id, isbn, accepted, payed);
+					allOffers.add(newOffer);
+				}
+
+				
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
+			} 
+			
+
+		
+		for(Offer offer:allOffers) {
+			System.out.println(offer);
+		}
+		
+	}
+	
+	@Override
+	public void seeAcceptedOffers() {
+		List<Offer> allOffers = new ArrayList<Offer>();
+		String sql = "select * from offers where accepted = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setBoolean(1,true);
+			
+			ResultSet rs = ps.executeQuery();
+
+				
+				while(rs.next()) {
+					int id = rs.getInt("c_id");
+					long isbn = rs.getLong("isbn");
+					boolean accepted = rs.getBoolean("accepted");
+					boolean payed = rs.getBoolean("payed");
+					
+
+
+					Offer newOffer = new Offer(id, isbn, accepted, payed);
+					allOffers.add(newOffer);
+				}
+
+				
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
+			} 
+			
+
+		
+		for(Offer offer:allOffers) {
+			System.out.println(offer);
+		}
+		
+	}
+	
+	
+	@Override
+	public void acceptOffer(int ID, long isbn) {
+		
+		String sql = "select * from offers where c_id = ? and isbn = ?;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1,ID);
+			ps.setLong(2, isbn);
+			
+			ResultSet rs = ps.executeQuery();
+
+				
+				while(rs.next()) {
+					int id = rs.getInt("c_id");
+					long isbns = rs.getLong("isbn");
+					boolean accepted = rs.getBoolean("accepted");
+					boolean payed = rs.getBoolean("payed");
+					
+
+
+					Offer newOffer = new Offer(id, isbns, accepted, payed);
+					System.out.println(newOffer);
+				}
+
+				
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
+			} 
+		System.out.println("Accept Offer?(y/n)");
+		String yn = sc.nextLine();
+		if(yn.equals("y")||yn.equals("Y")) {
+			String sql2 = "Update offers set accepted = true where c_id = ? and isbn = ?;";
+
+			
+			try (Connection con = 
+					ConnectionUtil.getConnectionFromFile()) {
+				PreparedStatement ps = con.prepareStatement(sql2);
+				
+				ps.setInt(1,ID);
+				ps.setLong(2, isbn);
+				
+				ps.execute();
+				
+			
+					System.out.println("Offer has been accepted");
+					sql = "Update Books set b_stock = (b_stock-1)  where b_isbn = ? ;";
+					String sql1 = "Select * from Books where b_isbn = ?;";
+				
+						PreparedStatement ps1 = con.prepareStatement(sql);
+						PreparedStatement ps2 = con.prepareStatement(sql1);
+						
+						ps1.setLong(1, isbn);
+						ps1.execute();
+						
+						ps2.setLong(1,isbn);
+						ResultSet rs2 = ps2.executeQuery();
+						if(rs2.getInt("b_stock")==0) {
+							String sql3 = "Delete from Offers where b_isbn = ?;";
+							
+							PreparedStatement ps3 = con.prepareStatement(sql3);
+							ps3.setLong(1, isbn);
+							
+							ps3.execute();
+						}
+
+									
+				} catch (SQLException | IOException e) {
+					e.printStackTrace();
+				} 
+		}
+		
+	}
 
 }

@@ -30,6 +30,7 @@ public class FrontController {
 					break;
 				case"3":
 					RegistrationController.logIn("Admin");
+					break;
 				case"4":
 					exit = true;
 					break;

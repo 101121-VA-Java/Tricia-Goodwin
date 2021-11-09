@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.models.Books;
-import com.revature.models.Bookseller;
 import com.revature.models.User;
 import com.revature.repositories.BooksDao;
 import com.revature.repositories.BooksPostgres;
@@ -27,11 +26,12 @@ public class BackController {
 			System.out.println("Choose an option:");
 			System.out.println("1. Add a new book");
 			System.out.println("2. Find location of book");
-			System.out.println("3. Update Price of Item");
-			System.out.println("4. Update Stock of Item");
+			System.out.println("3. Update Price or Stock of Item");
+			System.out.println("4. Check Status of book by ISBN");
 			System.out.println("5. Remove Item");
 			System.out.println("6. See pending offers");
-			System.out.println("4. Close");
+			System.out.println("7. See All Books");
+			System.out.println("8. Close");
 			String choicestr = sc.nextLine();
 			choice = Integer.parseInt(choicestr);
 			System.out.println("Input taken");
@@ -54,17 +54,24 @@ public class BackController {
 				}
 				break;
 			case 3:
-				
+				System.out.println("Enter isbn of book you wish to update:");
+				Long isbnu = sc.nextLong();
+				sc.nextLine();
+				bd.updateBook(isbnu);
+				System.out.println(bd.getBookByISBN(isbnu));
+
 				break;
-			case 4:	
-				System.out.println("Exit runs");
-				exit = true;
+			case 4:
+				System.out.println("Enter isbn of book you wish to view:");
+				Long isbnv = sc.nextLong();
+				sc.nextLine();
+				System.out.println(bd.getBookByISBN(isbnv));
 				break;
 			case 5:
 				System.out.println("Enter isbn of book you wish to delete:");
 				Long isbn = sc.nextLong();
 				sc.nextLine();
-				System.out.println(bd.findBook(isbn));
+				System.out.println(bd.getBookByISBN(isbn));
 				System.out.println("Confirm deleting book? (y/n): ");
 				String yn = sc.nextLine();
 				if(yn.equals("y")||yn.equals("Y")) {
@@ -75,7 +82,31 @@ public class BackController {
 					}else {
 						System.out.println("Book not removed.");
 				}
-				
+			case 6:
+				bd.seePendingOffers();
+				System.out.println("Accept offer?(y/n)");
+				String ny = sc.nextLine();
+					if (ny.equals("y")||ny.equals("Y")) {
+						System.out.println("Enter customer ID:");
+						int cID = sc.nextInt();
+						sc.nextLine();
+						System.out.println("Enter book isbn:");
+						long isbnO = sc.nextLong();
+						sc.nextLine();
+						bd.acceptOffer(cID, isbnO);
+					}
+
+				break;
+			case 7:
+				List <Books> result = bd.getAllBooks();
+				for(Books book:result) {
+					System.out.println(book);
+				}
+				break;
+			case 8:	
+				System.out.println("Exit runs");
+				exit = true;
+				break;	
 			default:
 				System.out.println("Default case");
 				break;
@@ -88,11 +119,10 @@ public class BackController {
 	
 	public static void CustomerMenu(int ID) {
 		int choice = 0;
-		//BooksDao bd = new BooksPostgres();
 		boolean exit = false;
 		
 		while(!exit) {
-			System.out.println("Choose an option:");
+			System.out.println("\nChoose an option:");
 			System.out.println("1. See books by genre");
 			System.out.println("2. See books by Author");
 			System.out.println("3. Find book by title");
@@ -103,9 +133,9 @@ public class BackController {
 			System.out.println("8. See My Owned Books");
 			System.out.println("9. Log Out");
 			
-			String choicestr = sc.nextLine();
-			choice = Integer.parseInt(choicestr);
-			System.out.println("Input taken");
+			choice = sc.nextInt();
+			sc.nextLine();
+
 			switch(choice) {
 			case 1: 
 				List <Books> result = bd.getAllBooksByGenre();
@@ -142,8 +172,11 @@ public class BackController {
 				}
 				break;
 			case 7:
+				bd.seeMyOffers(ID);
 				break;
 			case 8:
+				bd.seeMyBooks(ID);
+				
 				break;
 			case 9:
 				exit = true;
@@ -157,29 +190,29 @@ public class BackController {
 				
 	}
 	
-	public static void OwnerMenu() {
+	public static void OwnerMenu(int ID) {
 		Scanner sc = BooksScanner.getScanner();
 		int choice = 0;
 		boolean exit = false;
 		UserDao ud = new UsersPostgres();
 		while(!exit) {
 			System.out.println("Choose an option:");
-			System.out.println("1. Add a new book");
+			System.out.println("1. Employee Menu");
 			System.out.println("2. Add a new employee");
 			System.out.println("3. View all employees");
 			System.out.println("4. View All transactions");
 			System.out.println("5. View pending transactions");
 			System.out.println("6. Update employee");
 			System.out.println("7. Fire Employee");
-			System.out.println("8.      ");
+			System.out.println("8. View Week's transactions");
 			System.out.println("9. Close");
 			String choicestr = sc.nextLine();
 			choice = Integer.parseInt(choicestr);
 			System.out.println("Input taken");
 			switch(choice) {
 			case 1: 
-				BooksController.newBook();
-				System.out.println("End of case");
+				BackController.EmployeeMenu(ID);
+
 				break;
 			case 2:
 				RegistrationController.newUser("Admin");
@@ -191,6 +224,7 @@ public class BackController {
 				}
 				break;
 			case 4:
+				bd.seeAcceptedOffers();
 				break;
 			case 5:
 				break;

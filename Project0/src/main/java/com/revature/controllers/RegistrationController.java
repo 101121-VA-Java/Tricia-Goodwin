@@ -113,7 +113,7 @@ public class RegistrationController {
 			if (u.getRole().equals("Admin")) {
 				BackController.EmployeeMenu(u.getId());
 			} else if (u.getRole().equals("Owner")) {
-				BackController.OwnerMenu();
+				BackController.OwnerMenu(u.getId());
 			} else {
 				BackController.CustomerMenu(u.getId());
 			}
