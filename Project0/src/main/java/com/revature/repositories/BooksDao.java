@@ -20,6 +20,17 @@ public interface BooksDao {
 	List<Books> getAllBooksByAuthor();
 
 	List<Books> getAllBooksByGenre();
+
+	void listGenres();
+
+	boolean offerBook(int Cust_id, long isbn);
+
+	boolean sellBook(int Cust_id, long isbn);
+
+	boolean pendingOffer(int Cust_id, long isbn);
+
+	boolean deleteBook(Long isbn);
+
 	
 	
 

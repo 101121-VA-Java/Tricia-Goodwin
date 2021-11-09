@@ -15,19 +15,22 @@ public class FrontController {
 			while(!exit) {
 				System.out.println("Please select an option: ");
 				System.out.println("1: Register");
-				System.out.println("2. Login with an existing account.");
-				System.out.println("3. Exit");
+				System.out.println("2. Login with an existing Customer account.");
+				System.out.println("3. Login with an existing Employee account.");
+				System.out.println("4. Exit");
 				
 				String choice = sc.nextLine();
 				
 				switch(choice) {
 				case"1":
-					RegistrationController.newUser();
+					RegistrationController.newUser("Customer");
 					break;
 				case"2":
-					RegistrationController.logIn();
+					RegistrationController.logIn("Customer");
 					break;
 				case"3":
+					RegistrationController.logIn("Admin");
+				case"4":
 					exit = true;
 					break;
 				default:

@@ -9,7 +9,7 @@ public class Bookseller extends User {
 		super(username, password);
 		this.setRole("ADMIN");
 		numOfUsers++;
-		this.setId(12345+numOfUsers);
+
 		setHrlyRate(16);
 	}
 	
@@ -18,13 +18,38 @@ public class Bookseller extends User {
 		super(username, password);
 		this.setRole(role);
 		numOfUsers++;
-		this.setId(12345+numOfUsers);
 		if(role.equals("ADMIN")) {
 			setHrlyRate(16);
 		}else if(role.equals("OWNER")) {
 			setHrlyRate(30);
 		}
 
+	}
+	
+
+	public Bookseller(String fname, String lname, String username, String password, String role) {
+		super(fname, lname, username, password);
+		this.setRole(role);
+		numOfUsers++;
+		if(role.equals("ADMIN")) {
+			setHrlyRate(16);
+		}else if(role.equals("OWNER")) {
+			setHrlyRate(30);
+		}
+		
+		
+	}
+
+
+	public Bookseller(int ID, String fname, String lname, String username, String password, double hrlyRate) {
+		super(fname, lname, username, password);
+		this.hrlyRate = hrlyRate;
+		this.setId(ID);
+		if(username.equals("Owner")) {
+			this.setRole("Owner");
+		}else {
+		this.setRole("Admin");
+		}
 	}
 
 
@@ -34,6 +59,18 @@ public class Bookseller extends User {
 
 	public void setHrlyRate(double hrlyRate) {
 		this.hrlyRate = hrlyRate;
+	}
+
+
+	@Override
+	public String toString() {
+		int id = this.getId();
+		String username = this.getUsername();
+		String fname = this.getFname();
+		String lname = this.getLname();
+		
+		return "Bookseller [id=" + id + ", username=" + username + ", Name = "+fname + " " + lname + ", hrlyRate=" + hrlyRate + "]";
+
 	}
 	
 	

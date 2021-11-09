@@ -8,10 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 
 import com.revature.models.Books;
+import com.revature.models.Bookseller;
+import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 import com.revature.repositories.BooksScanner;
 
@@ -339,5 +342,146 @@ public class BooksPostgres implements BooksDao {
 			return books;
 
 	}
+	@Override
+	public boolean offerBook(int Cust_id, long isbn) {
+		boolean executed = false;
+		String sql = "insert into offers (c_id, isbn, accepted, payed)"
+				+ "values (?, ?, ?, ?);";
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, Cust_id);
+			ps.setLong(2, isbn);
+			ps.setBoolean(3, false);
+			ps.setBoolean(4, false);
+			
+			executed = ps.execute();
+			
+
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return executed;
+	}
+
+	
+	
+	@Override
+	public boolean pendingOffer(int Cust_id, long isbn) {
+		boolean executed = false;
+		String sql = "insert into offers (c_id, isbn, accepted, payed)"
+				+ "values (?, ?, ?, ?);";
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, Cust_id);
+			ps.setLong(2, isbn);
+			ps.setBoolean(3, false);
+			ps.setBoolean(4, false);
+			
+			executed = ps.execute();
+			
+
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return executed;
+	}
+	
+	
+	@Override
+	public boolean sellBook(int Cust_id, long isbn) {
+		boolean executed = false;
+		String sql = "insert into offers (c_id, isbn, accepted, payed)"
+				+ "values (?, ?, ?, ?);";
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, Cust_id);
+			ps.setLong(2, isbn);
+			ps.setBoolean(3, false);
+			ps.setBoolean(4, false);
+			
+			executed = ps.execute();
+			
+
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return executed;
+	}
+
+
+	@Override
+	public void listGenres() {
+		// TODO Auto-generated method stub
+		String sql = "select b_genre from books;";
+		LinkedHashSet <String> genres = new LinkedHashSet<>();
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				String genre = rs.getString("b_genre");
+
+				
+//				for(String g: genres){
+//					if (genre.equals(g)) {
+//						break;
+//						
+//					} else {
+						genres.add(genre);
+//					}
+//				}
+				
+						
+			}
+
+			
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		} 
+		for(String g: genres){
+			System.out.println(g);
+		}
+		
+	}
+
+
+
+
+
+	@Override
+	public boolean deleteBook(Long isbn) {
+		// TODO Auto-generated method stub
+		boolean found = false;
+		String sql = "delete from books where b_isbn = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setLong(1,isbn);
+			found = ps.execute();
+			//found = rs.next();
+			
+			
+			
+			
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return found;	}
 
 }

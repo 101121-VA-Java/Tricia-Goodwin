@@ -1,0 +1,142 @@
+
+
+drop table if exists books;
+create table if not exists books(
+	b_title varchar(75),
+	b_author varchar(25),
+	b_isbn integer primary key,
+	b_released boolean,
+	b_stock integer,
+	b_genre varchar(50),
+	b_price decimal(4,2),
+	b_hardcover boolean,
+	b_nytb boolean
+);
+insert into books ()
+drop table if exists tasks;
+create table if not exists tasks(
+	/*
+	 * id
+	 * name
+	 * description
+	 * completion_status
+	 * due_date
+	 * employee
+	 */
+	id serial primary key,
+	t_name varchar(20),
+	t_description text,
+	t_completion_status varchar(10),
+	t_assign_date date default current_date,
+	t_due_date date,
+	t_assigned_emp integer references employees(e_id)
+);
+
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Big Heat, The', 'Vasilyonok', 316002186, true, 8, 'Drama', 17.88, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Beloved', 'Duker', 243494307, true, 25, 'Drama', 15.43, true, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Baby On Board', 'Eake', 103116829, true, 15, 'Comedy', 29.96, false, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Hated', 'Bauldrey', 568817058, true, 7, 'Non-fiction', 22.03, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Interview with the Vampire: The Vampire Chronicles', 'Joberne', 583339776, true, 7, 'Drama', 35.99, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Out of the Blue (Aramoana)', 'Smithers', 779965533, true, 0, 'Mystery', 28.45, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Youth of the Beast (Yaju no seishun)', 'Selesnick', 199600848, true, 8, 'Mystery', 17.28, false, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Great Lie, The', 'Caddy', 626584916, false, 12, 'Drama', 9.16, true, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Portrait of Wally', 'Gealle', 884555868, false, 20, 'Non-fiction', 20.01, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Intimacy', 'Pyne', 523050420, true, 0, 'Drama', 21.43, false, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('El Cid', 'Mapplebeck', 727834071, true, 13, 'Romance', 32.09, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Shining Through', 'Cowey', 841848634, false, 11, 'Romance', 39.4, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Cars 2', 'Krojn', 674303198, true, 4, 'Children', 34.02, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Gamera vs. Jiger', 'Genn', 818232859, true, 8, 'Fantasy', 19.82, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Goats', 'Bridie', 336578249, true, 14, 'Comedy', 15.02, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Rhapsody in Blue', 'Skeath', 703464793, true, 7, 'Drama', 37.89, true, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Stories We Tell', 'Cosgry', 963384398, true, 21, 'Non-fiction', 38.85, false, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Johnny 100 Pesos (Johnny cien pesos)', 'Sollas', 654729212, true, 16, 'Drama', 29.05, false, true);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Dimples', 'East', 390967126, true, 16, 'Children', 23.03, true, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Host, The', 'MacCorkell', 944340324, false, 19, 'Romance', 37.2, true, false);
+
+delete from books where b_isbn = 553418026;
+
+update books set b_price = 15.99 where b_title = 'Artemis';
+
+
+
+
+drop table if exists Booksellers;
+create table if not exists Booksellers(
+
+	bs_emp_id serial primary key,
+	bs_fname varchar(20),
+	bs_lname varchar(20),
+	bs_username varchar(20) unique,
+	bs_role varchar(15),
+	bs_password varchar(20),
+	bs_hrly decimal(4,2)
+);
+
+
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Andrea', 'Marjot', 'Owner', 'Owner', 'ownerpassword', 30.00);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Barn', 'Mc Caughan', 'bmccaughan1', 'Admin', 'QH4dfIa', 12.98);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Anabal', 'Tift', 'atift2', 'Admin', 'BmMIhQ4uLwYv', 9.86);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Vincenty', 'Marton', 'vmarton3', 'Admin', 'KPXcp3fowg', 11.2);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Marcelo', 'Matas', 'mmatas4', 'Admin', 'tEytdNNX6Gqw', 15.11);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Arv', 'Kitchingman', 'akitchingman5', 'Admin', 'HBSimob', 15.68);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Ruy', 'Datte', 'rdatte6', 'Admin', 'fby0lFLVc8', 15.14);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Marian', 'Janecki', 'mjanecki7', 'Admin', 'KpmoCCi', 16.91);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Boris', 'Padly', 'bpadly8', 'Admin', 'RBtSy5Cj', 17.17);
+insert into Booksellers (bs_fname, bs_lname, bs_username, bs_role, bs_password, bs_hrly) values ('Marty', 'Coulthard', 'mcoulthard9', 'Admin', 'HoMlGd1', 13.35);
+
+
+
+
+delete from booksellers where bs_username = "tricialynngood";
+
+Update Booksellers set bs_fname = 'Patricia'  where bs_username = 'plg1003';
+
+
+drop table if exists Customers;
+create table if not exists Customers(
+
+	c_id serial primary key,
+	c_fname varchar(20),
+	c_lname varchar(20),
+	c_username varchar(20) unique,
+	c_role varchar(15),
+	c_password varchar(20),
+	c_books int
+);
+
+
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Dominick', 'Covet', 'dcovet0', 'Customer', 'IIES1I0Tv', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Maryjane', 'Hane', 'mhane1', 'Customer', '2IuZ91g', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Dorie', 'McGrill', 'dmcgrill2', 'Customer', '83hU0t1N76D', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('De', 'Franz', 'dfranz3', 'Customer', '8EH9Btp', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Othilie', 'Danels', 'odanels4', 'Customer', 'q5tQf8fgtRw', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Maryann', 'McNee', 'mmcnee5', 'Customer', 'I0EPWt', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Keenan', 'Dandy', 'kdandy6', 'Customer', 'V6o6cnT', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Sanders', 'Asling', 'sasling7', 'Customer', 'N6o4bQ4hJ', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Dione', 'Staziker', 'dstaziker8', 'Customer', '5uobjGWGsAZ', 0);
+insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Merna', 'Hassewell', 'mhassewell9', 'Customer', 'JfFgwcDB4', 0);
+
+
+
+delete from c
+delete from customers where c_id > 10;
+
+drop table if exists BooksOwned;
+create table if not exists BooksOwned(
+	c_id int,
+	isbn int
+);
+
+
+drop table if exists Offers;
+create table if not exists Offers(
+	c_id int,
+	isbn int,
+	accepted boolean,
+	payed boolean
+	
+);
+
+insert into offers (c_id, isbn, accepted, payed) values (3, 103116829, false, false);
+
+
