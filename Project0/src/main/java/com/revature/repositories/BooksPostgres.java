@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,6 +24,8 @@ public class BooksPostgres implements BooksDao {
 	
 	private static Logger log = LogManager.getRootLogger();
 	static Scanner sc = BooksScanner.getScanner();
+	DecimalFormat numberFormat = new DecimalFormat("#.00");
+
 
 	//@Override
 	public List<Books> getAllBooks() {
@@ -655,7 +658,8 @@ public class BooksPostgres implements BooksDao {
 			System.out.println(offer);
 			cost=cost+getPrice(offer.getIsbn());
 		}
-		System.out.println("Cost of all pending offers is: "+cost);
+
+		System.out.println("Cost of all pending offers is: "+numberFormat.format(cost));
 		
 	}
 
@@ -699,7 +703,7 @@ public class BooksPostgres implements BooksDao {
 			System.out.println(offer);
 			cost=cost+getPrice(offer.getIsbn());
 		}
-		System.out.println("Cost of all pending offers is: "+cost);
+		System.out.println("Cost of all pending offers is: "+numberFormat.format(cost));
 		
 	}
 	
@@ -742,7 +746,7 @@ public class BooksPostgres implements BooksDao {
 			System.out.println(offer);
 			cost=cost+getPrice(offer.getIsbn());
 		}
-		System.out.println("Cost of all accepted offers is: "+cost);
+		System.out.println("Cost of all accepted offers is: "+numberFormat.format(cost));
 		
 	}
 	
@@ -808,13 +812,17 @@ public class BooksPostgres implements BooksDao {
 						
 						ps2.setLong(1,isbn);
 						ResultSet rs2 = ps2.executeQuery();
-						if(rs2.getInt("b_stock")==0) {
+						while(rs2.next()) {
+						int newStock = rs2.getInt("b_stock");
+						
+						if(newStock==0) {
 							String sql3 = "Delete from Offers where b_isbn = ?;";
 							
 							PreparedStatement ps3 = con.prepareStatement(sql3);
 							ps3.setLong(1, isbn);
 							
 							ps3.execute();
+						}
 						}
 
 									

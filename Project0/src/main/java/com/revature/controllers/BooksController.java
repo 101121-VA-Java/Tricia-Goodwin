@@ -10,6 +10,7 @@ import com.revature.repositories.BooksScanner;
 public class BooksController {
 	
 	static BooksDao bd = new BooksPostgres();
+
 	
 	public static void newBook() {
 		Scanner sc = BooksScanner.getScanner();

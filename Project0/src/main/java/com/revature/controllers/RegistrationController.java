@@ -17,7 +17,7 @@ public class RegistrationController {
 
 		Scanner sc = BooksScanner.getScanner();
 
-		System.out.println("Create a New User.");
+		System.out.println("\nCreate a New User.");
 
 		System.out.println("Enter a username:");
 		String username = sc.nextLine();
@@ -59,9 +59,8 @@ public class RegistrationController {
 		String password = sc.nextLine();
 		if (role.equals("Admin") || role.equals("Owner")) {
 			if (findUser(username)) {
-				System.out.println("Bookseller found");
+
 				Bookseller u = ud.retrieveBookseller(username);
-				System.out.println(u);
 				bksellr = true;
 				
 			} else {
@@ -71,6 +70,7 @@ public class RegistrationController {
 				System.out.println("2. Return to previous menu");
 
 				int choice = sc.nextInt();
+				sc.nextLine();
 				if (choice == 1) {
 					logIn(role);
 				} else {
@@ -103,10 +103,10 @@ public class RegistrationController {
 		}else if (!exit&&bksellr) {
 			 u = ud.retrieveBookseller(username);
 		}
-		System.out.println(u);
 		
 		if (u.getPassword().equals(password)&&!exit) {
 			System.out.println("Log in complete.");
+			System.out.println("Welcome " + u.getFname());
 			if (u.getRole().equals("Admin")) {
 				BackController.EmployeeMenu(u.getId());
 			} else if (u.getRole().equals("Owner")) {

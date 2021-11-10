@@ -23,7 +23,7 @@ public class BackController {
 		
 		
 		while(!exit) {
-			System.out.println("Choose an option:");
+			System.out.println("\nChoose an option:");
 			System.out.println("1. Add a new book");
 			System.out.println("2. Find location of book");
 			System.out.println("3. Update Price or Stock of Item");
@@ -195,7 +195,7 @@ public class BackController {
 		boolean exit = false;
 		UserDao ud = new UsersPostgres();
 		while(!exit) {
-			System.out.println("Choose an option:");
+			System.out.println("\nChoose an option:");
 			System.out.println("1. Employee Menu");
 			System.out.println("2. Add a new employee");
 			System.out.println("3. View all employees");

@@ -13,7 +13,7 @@ public class FrontController {
 			boolean exit = false;
 			
 			while(!exit) {
-				System.out.println("Please select an option: ");
+				System.out.println("\nPlease select an option: ");
 				System.out.println("1: Register");
 				System.out.println("2. Login with an existing Customer account.");
 				System.out.println("3. Login with an existing Employee account.");
@@ -33,6 +33,8 @@ public class FrontController {
 					break;
 				case"4":
 					exit = true;
+					BooksScanner.closeScanner();
+
 					break;
 				default:
 					System.out.println("Invalid input");
