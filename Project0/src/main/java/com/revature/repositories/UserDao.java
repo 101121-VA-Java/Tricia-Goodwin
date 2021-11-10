@@ -10,7 +10,6 @@ import com.revature.models.User;
 public interface UserDao {
 	
 	
-		//User addUser(String username, String password);
 		List<User> getAllBooksellers();
 		List<User> getAllCustomers();
 		User getUserById(int id, String role);
