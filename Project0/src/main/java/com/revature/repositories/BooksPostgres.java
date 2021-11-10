@@ -11,6 +11,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.models.Books;
 import com.revature.models.Offer;
 import com.revature.util.ConnectionUtil;
@@ -18,6 +21,7 @@ import com.revature.util.ConnectionUtil;
 
 public class BooksPostgres implements BooksDao {
 	
+	private static Logger log = LogManager.getRootLogger();
 	static Scanner sc = BooksScanner.getScanner();
 
 	//@Override
@@ -104,6 +108,30 @@ public class BooksPostgres implements BooksDao {
 			
 		return newBook;
 
+	}
+	
+	public double getPrice(long isbn) {
+		double price = 0;
+		String sql = "select * from books where b_isbn = ? ;";
+
+		
+		try (Connection con = 
+				ConnectionUtil.getConnectionFromFile()) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setLong(1,isbn);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				price = rs.getDouble("b_price");
+
+			}
+			
+			
+		}catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return price;
 	}
 
 	@Override
@@ -364,6 +392,8 @@ public class BooksPostgres implements BooksDao {
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
+		log.info("Customer  " + Cust_id + " has made and offer on " + isbn);
+
 			return executed;
 		}else {
 			System.out.println("I'm Sorry, that book is not available");
@@ -419,6 +449,7 @@ public class BooksPostgres implements BooksDao {
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
+
 		return executed;
 	}
 
@@ -516,6 +547,8 @@ public class BooksPostgres implements BooksDao {
 				ps.setDouble(1,price);
 				ps.setLong(2, isbn);
 				ps.execute();
+				log.info("Price of " + isbn + " has been updated.");
+
 			
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -534,6 +567,8 @@ public class BooksPostgres implements BooksDao {
 				ps.setDouble(1,stock);
 				ps.setLong(2, isbn);
 				ps.execute();
+				log.info("Stock of " + isbn + " has been updated.");
+
 			
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -583,6 +618,7 @@ public class BooksPostgres implements BooksDao {
 
 	@Override
 	public void seeMyOffers(int ID) {
+		double cost = 0;
 		List<Offer> myOffers = new ArrayList<Offer>();
 		String sql = "select * from offers where c_id = ? ;";
 
@@ -617,13 +653,16 @@ public class BooksPostgres implements BooksDao {
 		
 		for(Offer offer:myOffers) {
 			System.out.println(offer);
+			cost=cost+getPrice(offer.getIsbn());
 		}
+		System.out.println("Cost of all pending offers is: "+cost);
 		
 	}
 
 	
 	@Override
 	public void seePendingOffers() {
+		double cost = 0;
 		List<Offer> allOffers = new ArrayList<Offer>();
 		String sql = "select * from offers where accepted = ? ;";
 
@@ -658,12 +697,15 @@ public class BooksPostgres implements BooksDao {
 		
 		for(Offer offer:allOffers) {
 			System.out.println(offer);
+			cost=cost+getPrice(offer.getIsbn());
 		}
+		System.out.println("Cost of all pending offers is: "+cost);
 		
 	}
 	
 	@Override
 	public void seeAcceptedOffers() {
+		double cost = 0;
 		List<Offer> allOffers = new ArrayList<Offer>();
 		String sql = "select * from offers where accepted = ? ;";
 
@@ -698,7 +740,9 @@ public class BooksPostgres implements BooksDao {
 		
 		for(Offer offer:allOffers) {
 			System.out.println(offer);
+			cost=cost+getPrice(offer.getIsbn());
 		}
+		System.out.println("Cost of all accepted offers is: "+cost);
 		
 	}
 	
@@ -750,7 +794,8 @@ public class BooksPostgres implements BooksDao {
 				
 				ps.execute();
 				
-			
+				log.info("Customer  " + ID + " has had an offer on " + isbn + " accepted.");
+
 					System.out.println("Offer has been accepted");
 					sql = "Update Books set b_stock = (b_stock-1)  where b_isbn = ? ;";
 					String sql1 = "Select * from Books where b_isbn = ?;";

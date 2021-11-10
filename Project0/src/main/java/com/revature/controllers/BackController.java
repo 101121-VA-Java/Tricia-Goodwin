@@ -34,7 +34,6 @@ public class BackController {
 			System.out.println("8. Close");
 			String choicestr = sc.nextLine();
 			choice = Integer.parseInt(choicestr);
-			System.out.println("Input taken");
 			switch(choice) {
 			case 1: 
 				BooksController.newBook();
@@ -104,11 +103,11 @@ public class BackController {
 				}
 				break;
 			case 8:	
-				System.out.println("Exit runs");
 				exit = true;
 				break;	
 			default:
-				System.out.println("Default case");
+				System.out.println("Invalid input");
+				System.out.println("Please retry");
 				break;
 					
 			}
@@ -227,6 +226,7 @@ public class BackController {
 				bd.seeAcceptedOffers();
 				break;
 			case 5:
+				bd.seePendingOffers();
 				break;
 			case 6:
 				System.out.println("Enter employee username to update:");
@@ -246,13 +246,15 @@ public class BackController {
 				}
 				break;
 			case 8:
+				bd.seeAcceptedOffers();
+				bd.seePendingOffers();
 				break;
 			case 9:	
-				System.out.println("Exit runs");
 				exit = true;
 				break;
 			default:
-				System.out.println("Default case");
+				System.out.println("Invalid input");
+				System.out.println("Please retry");	
 				break;
 					
 			}

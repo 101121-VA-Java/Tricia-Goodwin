@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.exceptions.UserNotFoundException;
-import com.revature.models.Books;
 import com.revature.models.Bookseller;
 import com.revature.models.Customer;
 import com.revature.models.User;
@@ -20,6 +22,8 @@ import com.revature.util.ConnectionUtil;
 public class UsersPostgres implements UserDao{
 
 	static Scanner sc = BooksScanner.getScanner();
+	private static Logger log = LogManager.getRootLogger();
+
 //	
 	@Override
 	public List<User> getAllCustomers() {
@@ -39,10 +43,11 @@ public class UsersPostgres implements UserDao{
 				String username = rs.getString("c_username");
 				String role = rs.getString("c_role");
 				String password = rs.getString("c_password");
-				String booksOwned = rs.getString("c_books");
+				int booksOwned = rs.getInt("c_books");
 
 				
-				Customer newCust = new Customer(fname, lname, username, password);
+				Customer newCust = new Customer(id, fname, lname, username,role, password, booksOwned);
+
 				customers.add(newCust);
 			}
 
@@ -188,7 +193,8 @@ public class UsersPostgres implements UserDao{
 			ps.setInt(6, 0);
 			
 			executed = ps.execute();
-			
+			log.info("Customer Account " + username + " has been created.");
+
 			
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
@@ -209,6 +215,9 @@ public class UsersPostgres implements UserDao{
 					ps.setDouble(6, 16.00);
 					
 					executed = ps.execute();
+					log.info("Bookseller Account " + username + " has been created.");
+
+					
 				} catch (SQLException | IOException e) {
 					e.printStackTrace();
 				}
@@ -271,7 +280,6 @@ public class UsersPostgres implements UserDao{
 					String lname = rs.getString("c_lname");
 					String username = rs.getString("c_username");
 					String password = rs.getString("c_password");
-					String booksOwned = rs.getString("c_books");
 					
 					
 
@@ -338,6 +346,7 @@ public class UsersPostgres implements UserDao{
 		}catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
+		log.info(username + " has been fired.");
 		return found;
 	}
 	
@@ -429,7 +438,8 @@ public class UsersPostgres implements UserDao{
 		default:
 			System.out.println("Choice not registered");
 		}
-		
+		log.info(username + " has been updated.");
+
 		return updated;
 		
 	}

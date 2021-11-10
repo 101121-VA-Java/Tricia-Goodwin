@@ -5,8 +5,6 @@ import java.util.Scanner;
 import com.revature.models.Bookseller;
 import com.revature.models.Customer;
 import com.revature.models.User;
-import com.revature.repositories.BooksDao;
-import com.revature.repositories.BooksPostgres;
 import com.revature.repositories.BooksScanner;
 import com.revature.repositories.UserDao;
 import com.revature.repositories.UsersPostgres;
@@ -83,7 +81,6 @@ public class RegistrationController {
 			}
 		} else {
 			if (findUser(username)) {
-				Customer u = ud.retrieveCustomer(username);
 				custmer = true;
 			} else {
 				System.out.println("Invalid password or user name");
