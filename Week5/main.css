@@ -1,22 +1,38 @@
 html{
-    background-color: #b00b69;
+    
+    background-image: url('https://previews.123rf.com/images/cerber82/cerber821809/cerber82180900347/107929838-fluid-art-abstract-colorful-background-wallpaper-mixing-paints-modern-art-marble-texture.jpg');
+    background-color: #b4799b;
     padding: 1.5em;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 body{
-    background-color: lightsalmon;
+    background-color: rgb(180, 122, 255);
     padding: 2.em;
 }
 header{
     background-color:palevioletred;
     padding: 2.em;
+    border-top: 2px solid whitesmoke;
+    
 }
 
 nav{
     background-color: lightpink;
+    border-top: 2px solid whitesmoke;
+    border-bottom: 2px solid whitesmoke; 
 }
+ul li {
+    float: left;
+}
+  
+ul li:last-child{
+    float: right;
+}
+
 footer{
-    background-color:rgb(255, 136, 0);
+    background-color:rgb(238, 170, 223);
 }
 main{
     background-color:aliceblue;
 }
+

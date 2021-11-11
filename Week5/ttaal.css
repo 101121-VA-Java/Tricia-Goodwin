@@ -1,0 +1,47 @@
+
+
+img {
+    width: 350px;
+    height: 300px;
+  }
+
+table{
+    margin-right: auto;
+    margin-left: auto;
+}
+td,th {
+    padding: 2em;
+    border: 2px solid whitesmoke;
+    text-align: center;
+}
+
+.truth:hover{
+    background-color: blue;
+    color: white;
+}
+
+.lie:hover{
+    background-color: red;
+}
+.hide1 {
+    display: none;
+  }
+  .hide2 {
+    display: none;
+  }
+  .hide3 {
+    display: none;
+  }
+  
+  .hover1:hover + .hide1 {
+    display: block;
+    color: whitesmoke;
+  }
+  .hover2:hover + .hide2 {
+    display: block;
+    color:black;
+  }
+  .hover3:hover + .hide3 {
+    display: block;
+    color: whitesmoke;
+  }
