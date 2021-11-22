@@ -21,7 +21,7 @@ public class ConnectionUtil {
 
 		String password = prop.getProperty("password"); //$NON-NLS-1$
 
-		
+
 		if (con == null || con.isClosed()) {
 			con = DriverManager.getConnection(url, username, password);
 		}

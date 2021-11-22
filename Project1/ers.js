@@ -17,7 +17,7 @@ function logIn(){
 
     let xhr = new XMLHttpRequest();
    
-    xhr.open("POST", "http://localhost:8080");
+    xhr.open("POST", "http://localhost:8080/auth");
 
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
