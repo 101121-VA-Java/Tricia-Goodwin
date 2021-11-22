@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+    
+    <hibernate-configuration>
+
+	<!-- configuring session factory -->
+	<session-factory>
+		<property name="hibernate.connection.url">jdbc:postgresql://database-1.cg5jlpjgdi39.us-east-2.rds.amazonaws.com:5432/postgres</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">patricia14</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		
+		<property name="hibernate.default_schema">hbn</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<mapping class="com.revature.models.Users"></mapping>
+	</session-factory>
+
+</hibernate-configuration>

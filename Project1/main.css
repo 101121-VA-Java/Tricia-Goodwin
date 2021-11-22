@@ -1,0 +1,11 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #888888;
+    background-color: #EECC99;
+}
+
+main {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}

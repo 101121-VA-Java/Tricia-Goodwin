@@ -1,0 +1,74 @@
+drop table if exists ERS_REIMBURSEMENT;
+create table if not exists ERS_REIMBURSEMENT(
+	REIMB_ID integer not null,
+	REIMB_AMOUNT decimal(4,2) not null,
+	REIMB_SUBMITTED timestamp not null,
+	REIMB_RESOLVED timestamp,
+	REIMB_DESCRIPTION varchar(250),
+	REIMB_RECEIPT bytea,
+	REIMB_AUTHOR integer not null,
+	REIMB_RESOLVER integer not null,
+	REIMB_STATUS_ID integer not null,
+	REIMB_TYPE_ID integer not null,
+	primary key(REIMB_ID),
+	foreign key(REIMB_STATUS_ID)
+		references ers_reimbursement_status(REIMB_STATUS_ID),
+	foreign key(REIMB_TYPE_ID)
+		references ers_reimbursement_type(REIMB_TYPE_ID),
+	foreign key(REIMB_AUTHOR)
+		references ers_users(ERS_USERS_ID),
+	foreign key(REIMB_RESOLVER)
+		references ers_users(ERS_USERS_ID)
+);
+
+drop table if exists ERS_REIMBURSEMENT_STATUS;
+create table if not exists ERS_REIMBURSEMENT_STATUS(
+	REIMB_STATUS_ID integer not null unique,
+	REIMB_STATUS varchar(20) not null,
+	primary key(REIMB_STATUS_ID)
+);
+
+insert into ers_reimbursement_status (REIMB_STATUS_ID, REIMB_STATUS) values (1, 'PENDING');
+insert into ers_reimbursement_status (REIMB_STATUS_ID, REIMB_STATUS) values (2, 'APPROVED');
+insert into ers_reimbursement_status (REIMB_STATUS_ID, REIMB_STATUS) values (3, 'REJECTED');
+
+drop table if exists ERS_REIMBURSEMENT_TYPE;
+create table if not exists ERS_REIMBURSEMENT_TYPE(
+	REIMB_TYPE_ID integer not null unique,
+	REIMB_TYPE varchar(10) not null,
+	primary key(REIMB_TYPE_ID)
+);
+
+insert into ers_reimbursement_type (REIMB_TYPE_ID, reimb_type) values ( 1, 'TRAVEL');
+insert into ers_reimbursement_type (REIMB_TYPE_ID, reimb_type) values ( 2, 'HOUSING');
+insert into ers_reimbursement_type (REIMB_TYPE_ID, reimb_type) values ( 3, 'PER_DIEM');
+insert into ers_reimbursement_type (REIMB_TYPE_ID, reimb_type) values ( 4, 'OTHER');
+
+drop table if exists ERS_USERS;
+create table if not exists ERS_USERS(
+	ERS_USERS_ID int not null,
+	ERS_USERNAME varchar(50) not null unique,
+	ERS_PASSWORD varchar(50) not null,
+	USER_FIRST_NAME varchar(100) not null,
+	USER_LAST_NAME varchar(100) not null,
+	USER_EMAIL varchar(150) not null,
+	USER_ROLE_ID integer not null,
+	primary key(ERS_USERS_ID),
+	foreign key(USER_ROLE_ID)
+		references ers_user_roles(ERS_USER_ROLE_ID)
+);
+
+insert into ers_users (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) values (1, 'test', 'test', 'test', 'test', 'test@test.test', 1 );
+
+drop table if exists ERS_USER_ROLES;
+create table if not exists ERS_USER_ROLES(
+	ERS_USER_ROLE_ID integer not null unique,
+	USER_ROLE varchar(10) not null,
+	primary key(ERS_USER_ROLE_ID)
+);
+
+insert into ERS_USER_ROLES (ERS_USER_ROLE_ID, USER_ROLE) values ( 1, 'EMPLOYEE');
+insert into ERS_USER_ROLES (ERS_USER_ROLE_ID, USER_ROLE) values ( 2, 'MANAGER');
+insert into ERS_USER_ROLES (ERS_USER_ROLE_ID, USER_ROLE) values ( 3, 'ADMIN');
+
+select * from ERS_USERS INNER JOIN ERS_USER_ROLES ON (ERS_USERS.USER_ROLE_ID = ERS_USER_ROLES.ERS_USER_ROLE_ID)
