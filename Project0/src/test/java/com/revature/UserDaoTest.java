@@ -2,7 +2,14 @@ package com.revature;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import com.revature.models.Bookseller;
 import com.revature.models.Customer;
@@ -10,9 +17,15 @@ import com.revature.models.User;
 import com.revature.repositories.UserDao;
 import com.revature.repositories.UsersPostgres;
 
+@ExtendWith(MockitoExtension.class)
 public class UserDaoTest {
+	@Mock
+	private UserDao ud;
+	
+	@InjectMocks
+	private UserPostgres us;
 
-	static UserDao ud = new UsersPostgres();
+	//static UserDao ud = new UsersPostgres();
 
 	@BeforeAll
 	public static void setup() {
@@ -21,14 +34,21 @@ public class UserDaoTest {
 	@Order(1)
 	@Test
 	public void getCustomers() {
-		assertEquals(12,ud.getAllCustomers().size());
+		List<User> u = new ArrayList<User>();
+		u.add(new Customer(0, "test", "test", "test", "test", "test", 0));
+		
+		Mockito.when(ud.getAllCustomers()).thenReturn(u);
+		List<User> actual = u;
+		assertEquals(actual,ud.getAllCustomers());
 	}
 	
 	@Order(2)
 	@Test
 	public void addCustomerValid() {
-		ud.addUser("Eileen", "Goodwin", "EVisle2", "Password", "Customer");
-		assertEquals(13, ud.getAllCustomers().size());
+		Mockito.when(ud.addUser("Eileen", "Goodwin", "EVisle2", "Password", "Customer")).thenReturn(true);
+		boolean actual = ud.addUser("Eileen", "Goodwin", "EVisle2", "Password", "Customer");
+		boolean expected = ud.addUser("Eileen", "Goodwin", "EVisle2", "Password", "Customer");
+		assertEquals(expected,actual);
 	}
 	
 	@Order(3)

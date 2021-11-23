@@ -35,6 +35,8 @@ insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_pr
 insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Johnny 100 Pesos (Johnny cien pesos)', 'Sollas', 654729212, true, 16, 'Drama', 29.05, false, true);
 insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Dimples', 'East', 390967126, true, 16, 'Children', 23.03, true, false);
 insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Host, The', 'MacCorkell', 944340324, false, 19, 'Romance', 37.2, true, false);
+insert into books (b_title, b_author, b_isbn, b_released, b_stock, b_genre, b_price, b_hardcover, b_nytb) values ('Artemis', 'Weir', 946681544, true, 19, 'Sci-fi', 16.99, false, true);
+
 
 delete from books where b_isbn = 553418026;
 
@@ -96,8 +98,6 @@ insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books
 insert into Customers (c_fname, c_lname, c_username, c_role, c_password, c_books) values ('Merna', 'Hassewell', 'mhassewell9', 'Customer', 'JfFgwcDB4', 0);
 
 
-
-delete from c
 delete from customers where c_id > 10;
 
 drop table if exists BooksOwned;
@@ -117,6 +117,13 @@ create table if not exists Offers(
 	payed boolean
 	
 );
+
+insert into offers (c_id,isbn,accepted,payed) values (9, 643858616, false, false);
+insert into offers (c_id,isbn,accepted,payed) values (10, 643858616, false, false);
+insert into offers (c_id,isbn,accepted,payed) values (6, 643858616, false, false);
+insert into offers (c_id,isbn,accepted,payed) values (7, 643858616, false, false);
+insert into offers (c_id,isbn,accepted,payed) values (8, 643858616, false, false);
+insert into offers (c_id,isbn,accepted,payed) values (2, 643858616, true, true);
 
 drop table if exists Transactions;
 create table if not exists transaction(

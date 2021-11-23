@@ -816,7 +816,7 @@ public class BooksPostgres implements BooksDao {
 						int newStock = rs2.getInt("b_stock");
 						
 						if(newStock==0) {
-							String sql3 = "Delete from Offers where b_isbn = ?;";
+							String sql3 = "Delete from Offers where isbn = ?;";
 							
 							PreparedStatement ps3 = con.prepareStatement(sql3);
 							ps3.setLong(1, isbn);
