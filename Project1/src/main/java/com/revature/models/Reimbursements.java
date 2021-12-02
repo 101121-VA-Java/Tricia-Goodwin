@@ -14,6 +14,11 @@ public class Reimbursements {
 	private Users resolver;
 	private Status status;
 	private Type type;
+	
+	
+	public Reimbursements() {
+		super();
+	}
 	public double getAmount() {
 		return amount;
 	}
@@ -77,13 +82,13 @@ public class Reimbursements {
 		this.type = type;
 	}
 	public Reimbursements(double amount, Timestamp submitted, Timestamp resolved, String description,
-			BYTE_ARRAY receipt, Users author, Users resolver, Status status, Type type) {
+		 Users author, Users resolver, Status status, Type type) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		this.receipt = receipt;
+		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.status = status;

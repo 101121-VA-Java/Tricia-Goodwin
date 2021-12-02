@@ -18,7 +18,8 @@ public class AuthorizationController {
 		}
 		
 		if (loggedInToken != null){
-			ctx.header("Authorization", loggedInToken);
+			System.out.println(loggedInToken);
+			ctx.header("Auth", loggedInToken);
 			ctx.status(HttpCode.OK);
 			
 		} else {

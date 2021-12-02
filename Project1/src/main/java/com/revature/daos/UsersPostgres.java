@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Role;
@@ -99,7 +100,7 @@ public class UsersPostgres implements UsersDao {
 
 	@Override
 	public List<Users> getAllUsers() {
-		users = null;
+		List<Users> users = new ArrayList<>();
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){
 			String sql = "select * from ERS_USERS INNER JOIN ERS_USER_ROLES ON (ERS_USERS.USER_ROLE_ID = ERS_USER_ROLES.ERS_USER_ROLE_ID)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -122,6 +123,33 @@ public class UsersPostgres implements UsersDao {
 		} 
 	return users;
 }
+	
+
+//	@Override
+//	public List<Users> getUsersManId(int Id) {
+//		List<Users> users = new ArrayList<>();
+//		try(Connection con = ConnectionUtil.getConnectionFromFile()){
+//			String sql = "select * from ERS_USERS INNER JOIN ERS_USER_ROLES ON (ERS_USERS.USER_ROLE_ID = ERS_USER_ROLES.ERS_USER_ROLE_ID) where ";
+//			PreparedStatement ps = con.prepareStatement(sql);
+//			
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next()) {
+//				int ID = rs.getInt("ERS_USERS_ID");
+//				String username = rs.getString("ERS_USERNAME");
+//				String password = rs.getString("ERS_PASSWORD");
+//				String fname = rs.getString("USER_FIRST_NAME");
+//				String lname = rs.getString("USER_LAST_NAME");
+//				String email = rs.getString("USER_EMAIL");
+//				Role role = Role.valueOf(rs.getString("USER_ROLE"));
+//				
+//				 Users u = new Users(ID, username, password, fname, lname, email, role);
+//				 users.add(u);
+//			}
+//		}catch(SQLException | IOException e) {
+//			e.printStackTrace();
+//		} 
+//	return users;
+//}
 		
 	
 

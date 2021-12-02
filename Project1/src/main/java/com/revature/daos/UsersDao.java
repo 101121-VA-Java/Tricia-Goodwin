@@ -12,5 +12,6 @@ public interface UsersDao {
 	Users findUser(int ID);
 	Boolean userExists(String username);
 	Role userRole(String username);
+	//List<Users> getUsersManId(int Id);
 	
 }

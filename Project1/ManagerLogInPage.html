@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h2>Project 1: Employee Reimbursement System - Employee</h2>
+        <h2>Project 1: Employee Reimbursement System - Manager</h2>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">ERS</a>
@@ -23,7 +23,7 @@
               <a class="nav-link disabled" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../newReimbursement.html">New Reimbursement</a>
+              <a class="nav-link" href="#">View Employees</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">View Pending Requests</a>
@@ -41,9 +41,13 @@
       </nav>
    
       <button type="button" id="SeeUsers">View All Users</button>
-
-
+      <form>
+        
+        <input type="number" id="UserId">
+        <input type="button" value = "See Employee" id = "searchEmp">
+      </form>
       <script src = "loggedIn.js"></script>
-      <script src = "employeepage.js"></script>
+      <script src = "managerpage.js"></script>
+
 </body>
 </html>

@@ -23,8 +23,19 @@ function logIn(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 let LoggedInToken = xhr.getResponseHeader("Auth");
+                console.log(LoggedInToken);
                 sessionStorage.setItem("LoggedIn", LoggedInToken);
-                window.location.href = "../loggedInPage.html"
+
+                LIArr = LoggedInToken.split(':');
+                role = LIArr[1];
+
+                if (role == 'EMPLOYEE'){
+                    window.location.href = "../loggedInPage.html"
+                } else if (role == 'MANAGER' || role == 'ADMIN'){
+                    window.location.href = "../ManagerLogInPage.html"
+                } else{
+                   window.location.href = "../loggedInPage.html"
+                }
             } else {
                 document.getElementById("error-div").innerHTML = "Unable to login.";
             }
