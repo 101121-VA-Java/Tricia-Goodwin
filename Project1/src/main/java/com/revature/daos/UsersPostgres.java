@@ -18,12 +18,44 @@ public class UsersPostgres implements UsersDao {
 
 
 
+	
 	@Override
-	public Users addUser(String fname, String lname, String username, String password, String email, String role) {
+	public Users addUser(int ID, String fname, String lname, String username, String password, String email, String role) {
 		Users u = new Users(username, password,fname, lname, email, Role.valueOf(role));
-		//TODO add database entry
+		boolean success = false;
+		try(Connection con = ConnectionUtil.getConnectionFromFile()){
+			String sql = "insert into ERS_USERS (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) values (?, ?, ?, ?, ?, ?, ?);";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, ID);
+			ps.setString(2, username);
+			ps.setString(3, password);
+			ps.setString(4, fname);
+			ps.setString(5, lname);
+			ps.setString(6, email);
+			if(role.equals("MANAGER")) {
+				ps.setInt(7, 2);
+			}else if(role.equals("ADMIN")) {
+				ps.setInt(7, 3);
+			}else {
+				ps.setInt(7, 1);
+			}
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				
+			success = true;	
+				 
+			}
+		}catch(SQLException | IOException e) {
+			e.printStackTrace();
+		} 
+	if(success) {
 		return u;
+	}else {
+		return null;
 	}
+	}
+
 
 	@Override
 	public Users findUser(String username) {

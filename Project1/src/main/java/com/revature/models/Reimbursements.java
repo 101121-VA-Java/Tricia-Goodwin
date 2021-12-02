@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.print.DocFlavor.BYTE_ARRAY;
 
 public class Reimbursements {
+	private int ID;
 	private double amount;
 	private Timestamp submitted; 
 	private Timestamp resolved;
@@ -94,11 +95,31 @@ public class Reimbursements {
 		this.status = status;
 		this.type = type;
 	}
-	
+	public Reimbursements(int ID, double amount, Timestamp submitted, Timestamp resolved, String description,
+			 Users author, Users resolver, Status status, Type type) {
+			super();
+			this.ID = ID;
+			this.amount = amount;
+			this.submitted = submitted;
+			this.resolved = resolved;
+			this.description = description;
+			//this.receipt = receipt;
+			this.author = author;
+			this.resolver = resolver;
+			this.status = status;
+			this.type = type;
+		}
+		
 	@Override
 	public String toString() {
 		return "Reimbursements [amount=" + amount + ", submitted=" + submitted + ", description=" + description
 				+ ", author=" + author + ", status=" + status + ", type=" + type + "]";
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 	

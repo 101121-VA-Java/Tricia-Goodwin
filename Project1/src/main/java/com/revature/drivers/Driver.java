@@ -27,6 +27,7 @@ public class Driver {
 			path("auth", () -> {
 				post(AuthorizationController::logIn);
 			});
+			
 			path("users", () -> {
 				get(UsersController::getAllUsers);
 				
@@ -35,8 +36,17 @@ public class Driver {
 					
 					path("reimbursements", () -> {
 						get(ReimbursementsController::getByUserId);
-						put(ReimbursementsController::newReimbursement);
+						post(ReimbursementsController::newReimbursement);
 						
+						path("pending", () -> {
+							get(ReimbursementsController::getByUserIdPending);
+						});
+						path("approved", () -> {
+							get(ReimbursementsController::getByUserIdApproved);
+						});
+						path("denied", () -> {
+							get(ReimbursementsController::getByUserIdDenied);
+						});
 							
 					});
 					
@@ -57,6 +67,20 @@ public class Driver {
 					});
 					path("denied", () -> {
 						get(ReimbursementsController::getByDenied);
+					});
+					path("{Manid}", () ->{
+						path("{reID}", () ->{
+							path("approve", () -> {
+								put(ReimbursementsController::approveReimbursement);
+								
+							});
+							path("reject", () -> {
+								put(ReimbursementsController::rejectReimbursement);
+							});
+						});
+
+					
+						
 					});
 				});
 			});

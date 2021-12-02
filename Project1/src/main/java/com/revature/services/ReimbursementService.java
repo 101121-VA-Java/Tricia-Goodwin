@@ -34,4 +34,27 @@ public class ReimbursementService {
 			List<Reimbursements> reimbursements = rd.getDenied();
 			return reimbursements;
 		}
+		public List<Reimbursements> getAllID(int ID){
+			List<Reimbursements> reimbursements = rd.getAll(ID);
+			return reimbursements;
+	}
+			public List<Reimbursements> getPendingID(int ID) {
+				List<Reimbursements> reimbursements = rd.getPending(ID);
+				return reimbursements;
+			}
+			public List<Reimbursements> getApprovedID(int ID) {
+				List<Reimbursements> reimbursements = rd.getApproved(ID);
+				return reimbursements;
+			}
+			public List<Reimbursements> getDeniedID(int ID) {
+				List<Reimbursements> reimbursements = rd.getDenied(ID);
+				return reimbursements;
+			}
+			
+			public boolean approveRequest(int UserId, int ID) {
+				return rd.alterReimbursement(UserId, ID, true); 
+			}
+			public boolean rejectRequest(int UserID, int ID) {
+				return rd.alterReimbursement(UserID, ID, false); 
+			}
 }
