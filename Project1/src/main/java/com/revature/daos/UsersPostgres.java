@@ -8,12 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.models.Role;
 import com.revature.models.Users;
 import com.revature.util.ConnectionUtil;
 
 public class UsersPostgres implements UsersDao {
-
+	private static Logger log = LogManager.getRootLogger();
 	
 
 
@@ -48,6 +51,7 @@ public class UsersPostgres implements UsersDao {
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 	if(success) {
 		return u;
@@ -114,6 +118,7 @@ public class UsersPostgres implements UsersDao {
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 	return u;
 	}
@@ -131,6 +136,7 @@ public class UsersPostgres implements UsersDao {
 				}
 			}catch(SQLException | IOException e) {
 				e.printStackTrace();
+				log.catching(e);
 			} 
 		return exists;
 	}
@@ -160,6 +166,7 @@ public class UsersPostgres implements UsersDao {
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 
 		return role;
@@ -187,6 +194,7 @@ public class UsersPostgres implements UsersDao {
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 	return users;
 }
@@ -242,6 +250,7 @@ public class UsersPostgres implements UsersDao {
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 	return u;
 	}

@@ -11,6 +11,9 @@ import java.util.List;
 
 import javax.print.DocFlavor.BYTE_ARRAY;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.models.Reimbursements;
 import com.revature.models.Role;
 import com.revature.models.Status;
@@ -20,7 +23,7 @@ import com.revature.util.ConnectionUtil;
 
 public class ReimbursementPostgres implements ReimbursementDao {
 private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
-	
+private static Logger log = LogManager.getRootLogger();
 
 	@Override
 	public List<Reimbursements> getPending() {
@@ -52,6 +55,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -85,6 +89,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -119,6 +124,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -153,6 +159,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -186,6 +193,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -220,6 +228,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -268,6 +277,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return r;
 	}
@@ -277,7 +287,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 	public boolean alterReimbursement(int UserID, int ID, boolean approve) {
 		boolean completed = false;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "update  ERS_REIMBURSEMENT set REIMB_RESOLVER = ?, REIMB_RESOLVED = ?, REIMB_TYPE_ID = ? where REIMB_ID = ?;";
+			String sql = "update  ERS_REIMBURSEMENT set REIMB_RESOLVER = ?, REIMB_RESOLVED = ?, REIMB_STATUS_ID = ? where REIMB_ID = ?;";
 			PreparedStatement ps = con.prepareStatement(sql);
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			ps.setInt(1, UserID);
@@ -294,6 +304,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return completed;
 	}
@@ -328,6 +339,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -363,6 +375,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return reimbursements;
 	}
@@ -400,6 +413,7 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 //			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
+			log.catching(e);
 		} 
 		return completed;
 	}

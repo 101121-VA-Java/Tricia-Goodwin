@@ -100,17 +100,17 @@ public class UsersDaoTests {
 	
 	@Test
 	public void getUsersRole() {
-		Mockito.when(ud.userRole("username")).thenReturn(EMPLOYEE);
-		Role expected = EMPLOYEE;
+		Mockito.when(ud.userRole("username")).thenReturn(Role.valueOf("EMPLOYEE"));
+		Role expected = Role.valueOf("EMPLOYEE");
 		assertEquals(expected, ud.userRole("username"));
 	}
 	
-	@Test
-	Users addUser(String fname, String lname, String username, String password, String email, String role);
-	
-	
-	@Test
-	Users findUser(String username);
+//	@Test
+//	Users addUser(String fname, String lname, String username, String password, String email, String role);
+//	
+//	
+//	@Test
+//	Users findUser(String username);
 	
 	
 	

@@ -30,7 +30,7 @@ async function getUsers(){
     console.table(data);
 
     let Emps = document.getElementById("emps");
-    let result = "<h2>All Employees<h2>";
+    let result = "<h2>All Employees<h2><h5><h5>";
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
 
@@ -59,7 +59,7 @@ async function searchUser(){
     var data = employee;
     console.log(employee);
     let Emp = document.getElementById("employee");
-    let result = "<h2>Employee<h2>";
+    let result = "<h2>Employee<h2><h5><h5>";
 
         const element = data;
         console.log(data);

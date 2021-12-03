@@ -45,7 +45,7 @@ async function getRequests(){
         // table += "</table>";
         // document.getElementById("pendingtable").innerHTML = table;
         let all = document.getElementById("alltable");
-        let result = "<h2>All Requests<h2>";
+        let result = "<h2>All Requests<h2><h5><h5>";
         for (let i = 0; i < data.length; i++) {
             const element = data[i];
             var datesub = new Date(element.submitted);
@@ -94,7 +94,7 @@ async function allPending(){
     // table += "</table>";
     // document.getElementById("pendingtable").innerHTML = table;
     let pending = document.getElementById("pendingtable");
-    let result = "<h2>All Pending Requests<h2>";
+    let result = "<h2>All Pending Requests<h2><h5><h5>";
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
         var datesub = new Date(element.submitted);
@@ -172,7 +172,7 @@ async function allPending(){
     
     let id = LIArr[0];
     
-    apiURL = `http://localhost:8080/reimbursements/approved`;
+    apiURL = `http://localhost:8080/reimbursements/denied`;
     let response =  await fetch(apiURL, {
 
     });
@@ -188,7 +188,7 @@ async function allPending(){
     // table += "</table>";
     // document.getElementById("pendingtable").innerHTML = table;
     let rejected = document.getElementById("deniedtable");
-    let result = "<h2>All Approved Requests<h2>";
+    let result = "<h2>All Rejected Requests<h2><h5><h5>";
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
         var datesub = new Date(element.submitted);
@@ -236,7 +236,7 @@ async function allPending(){
     // table += "</table>";
     // document.getElementById("pendingtable").innerHTML = table;
     let allemp = document.getElementById("employeetable");
-    let result = `<h2>All Requests from Employee #${id}<h2>`;
+    let result = `<h2>All Requests from Employee #${id}<h2><h5><h5>`;
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
         var datesub = new Date(element.submitted);
@@ -249,12 +249,14 @@ async function allPending(){
         "/"+datesub.getFullYear()+
         " "+datesub.getHours()+
         ":"+datesub.getMinutes()}</div>`;
-    result += `<div>Date Approved or Rejected: ${dateapp.getDate()+
-            "/"+(dateapp.getMonth()+1)+
-            "/"+dateapp.getFullYear()+
-            " "+dateapp.getHours()+
-            ":"+dateapp.getMinutes()}</div>`;
-    result += `<div>Reviewed By: ${element.resolver.username}</div>`;
+        if(element.status!='PENDING'){
+            result += `<div>Date Approved or Rejected: ${dateapp.getDate()+
+                "/"+(dateapp.getMonth()+1)+
+                "/"+dateapp.getFullYear()+
+                " "+dateapp.getHours()+
+                ":"+dateapp.getMinutes()}</div>`;
+            result += `<div>Reviewed By: ${element.resolver.username}</div>`;
+        }
     result += `<div>Description of Request: ${element.description}</div>`;
     result += `<div>Status : ${element.status}</div>`;
     result += `<div>Type: ${element.type}</div>`;
@@ -265,43 +267,52 @@ async function allPending(){
 }
 
 async function approveReq(){
+    console.log("I am approving")
     let LIArr = loggedIn.split(":");
     let Myid = LIArr[0];
-    let reqId = document.getElementById("UserId").value;
+    let reqId = document.getElementById("reqId").value;
+    let result = document.getElementById("approvediv")
     apiURL = `http://localhost:8080/reimbursements/${Myid}/${reqId}/approve`;
+    //console.log(apiURL);
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", apiURL);
+    
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 console.log("Sent")
+                result.innerHTML = `Reimbursement # ${reqId} has been Approved.`;
             } else {
-                document.getElementById("error-div").innerHTML = "Unable to alter Reimbursement.";
+                result.innerHTML = "Unable to alter Reimbursement.";
             }
         } 
-        window.location.reload();
+       // window.location.reload();
 }
+xhr.send();
 }
 
 async function denyReq(){
     console.log("I am rejecting");
     let LIArr = loggedIn.split(":");
     let Myid = LIArr[0];
-    let reqId = document.getElementById("UserId").value;
+    let reqId = document.getElementById("reqId").value;
     apiURL = `http://localhost:8080/reimbursements/${Myid}/${reqId}/reject`;
+    console.log(apiURL);
     let xhr = new XMLHttpRequest();
     xhr.open("PUT", apiURL);
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 console.log("Sent")
+                document.getElementById("approvediv").innerHTML = `Reimbursement # ${reqId} has been Rejected.`;
             } else {
                 document.getElementById("error-div").innerHTML = "Unable to alter Reimbursement.";
             }
         } 
-        window.location.reload();
+        //window.location.reload();
     
 }
+xhr.send();
 }
 // async function makeReqTable(){
 //     let response = await fetch(apiURL, {
