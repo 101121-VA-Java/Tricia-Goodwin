@@ -18,6 +18,14 @@ public class ReimbursementService {
 			rd = DaoFactory.getDaoFactory().getReimbursementDao();
 			
 		}
+		UsersDao ud = DaoFactory.getDaoFactory().getUsersDao();
+		
+		public boolean add(Reimbursements r, int id) {
+
+			Users author = ud.findUser(id);
+			boolean added = rd.newReimbursement(r.getAmount(), r.getDescription(), author, r.getType());
+			return added;
+		}
 		public List<Reimbursements> getAll(){
 		List<Reimbursements> reimbursements = rd.getAll();
 		return reimbursements;

@@ -3,7 +3,6 @@ package com.revature.drivers;
 import com.revature.controllers.AuthorizationController;
 import com.revature.controllers.ReimbursementsController;
 import com.revature.controllers.UsersController;
-import com.revature.models.Users;
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;
 import static io.javalin.apibuilder.ApiBuilder.post;
@@ -31,8 +30,10 @@ public class Driver {
 			path("users", () -> {
 				get(UsersController::getAllUsers);
 				
+				
 				path("{id}", () -> {
 					get(UsersController::getUserById);
+					put(UsersController::updateUser);
 					
 					path("reimbursements", () -> {
 						get(ReimbursementsController::getByUserId);
@@ -87,6 +88,7 @@ public class Driver {
 			
 
 	}
+
 
 
 }

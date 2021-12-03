@@ -11,6 +11,7 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
 
 public class ReimbursementsController {
+	
 	public static void getByUserId(Context ctx) {
 		ReimbursementService rs = new ReimbursementService();
 		int id = Integer.parseInt(ctx.pathParam("id"));
@@ -51,7 +52,12 @@ public class ReimbursementsController {
 	}
 	
 	public static void newReimbursement(Context ctx) {
-	
+		ReimbursementService rs = new ReimbursementService();
+		int id = Integer.parseInt(ctx.pathParam("id"));
+		boolean r = rs.add(ctx.bodyAsClass(Reimbursements.class), id);
+
+			ctx.status(HttpCode.CREATED);
+
 	}
 	public static void getAll(Context ctx) {
 		ReimbursementService rs = new ReimbursementService();
@@ -94,6 +100,7 @@ public class ReimbursementsController {
 		ctx.status(HttpCode.OK);
 	}
 	public static void approveReimbursement(Context ctx) {
+		System.out.println("got to Java");
 		ReimbursementService rs = new ReimbursementService();
 		int userID = Integer.parseInt(ctx.pathParam("Manid"));
 		int ID = Integer.parseInt(ctx.pathParam("reID"));
@@ -104,6 +111,7 @@ public class ReimbursementsController {
 		ctx.status(HttpCode.OK);
 	}
 	public static void rejectReimbursement(Context ctx) {
+		System.out.println("got to Java");
 		ReimbursementService rs = new ReimbursementService();
 		int userID = Integer.parseInt(ctx.pathParam("Manid"));
 		int ID = Integer.parseInt(ctx.pathParam("reID"));

@@ -224,17 +224,18 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 		return reimbursements;
 	}
 
-	@Override
-	public List<Reimbursements> myPendingreimbursements(int ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<Reimbursements> myPendingreimbursements(int ID) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Reimbursements> myApprovedReimbursements(int ID) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	@Override
-	public List<Reimbursements> myApprovedReimbursements(int ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Reimbursements findRemibursement(int ID) {
@@ -366,11 +367,13 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 		return reimbursements;
 	}
 	
+	
+
 	@Override
-	public boolean newReimbursement(double amount, String description, Users author, String type) {
+	public boolean newReimbursement(double amount, String description, Users author, Type type) {
 		boolean completed= false;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){
-			String sql = "insert into ERS_REIMBURSEMENT (REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) values (?, ?, ?, ?, ?, ?, ?);";
+			String sql = "insert into ERS_REIMBURSEMENT (REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) values (?, ?, ?, ?, ?, ?);";
 			PreparedStatement ps = con.prepareStatement(sql);
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			
@@ -389,12 +392,12 @@ private UsersDao ud =DaoFactory.getDaoFactory().getUsersDao();
 				ps.setInt(6, 4);
 			}
 			
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				
-			completed = true;	
-				 
-			}
+			completed = ps.execute();
+//			while(rs.next()) {
+//				
+//			completed = true;	
+//				 
+//			}
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
 		} 

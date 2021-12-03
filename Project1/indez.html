@@ -10,17 +10,29 @@
         <header>
             <h2>Project 1: Employee Reimbursement System</h2>
         </header>
-        <nav>
-            <li><a href = "indez.html">Login</a></li>
-            <li><a href = "home.html">Home</a></li>
-        </nav>
+
         <div>
-            
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">ERS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="Indez.html">Log In</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id='SeeUsers' href="home.html">Home</a>
+                </li>
+              </ul>
+            </div>
         </div>
+
+        <main>
         <form id="login" >
-            <label>email:</label>
-            <input type="email" autocomplete="email" name = "email" id="email">
-            <br><br>
+           
             <label>username:</label>
             <input type="text" autocomplete="username" name = "username" id="username">
             <br><br>
@@ -35,7 +47,7 @@
             <br>
 
         </form>
-        
+      </main>
 
         <!-- <div class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">

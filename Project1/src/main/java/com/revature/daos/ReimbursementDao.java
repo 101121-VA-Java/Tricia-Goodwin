@@ -21,5 +21,6 @@ public interface ReimbursementDao {
 	List<Reimbursements> getPending(int ID);
 	List<Reimbursements> getApproved(int ID);
 	List<Reimbursements> getDenied(int ID);
-	boolean newReimbursement(double amount, String description, Users author, String type);
+	boolean newReimbursement(double amount, String description, Users author, Type type);
+	Reimbursements findRemibursement(int ID);
 }

@@ -7,13 +7,13 @@ function logIn(){
 
     document.getElementById("error-div").innerHTML = "";
 
-    let email = document.getElementById("email").value;
+    
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
     console.log(username);
     console.log(password);
-    console.log(email);
+
 
     let xhr = new XMLHttpRequest();
    

@@ -58,6 +58,41 @@ public class UsersPostgres implements UsersDao {
 
 
 	@Override
+	public Users updateUser(int ID, String fname, String lname,String username, String password, String email) {
+		boolean success = false;
+		Users u = findUser(username);
+		u.setEmail(email);
+		u.setFname(fname);
+		u.setLname(lname);
+		u.setUsername(username);
+		u.setPassword(password);
+		
+		try(Connection con = ConnectionUtil.getConnectionFromFile()){
+			String sql = "update ERS_USERS set ERS_USERNAME = ?, ERS_PASSWORD = ?, USER_FIRST_NAME = ?,"
+					+ "USER_LAST_NAME = ?, USER_EMAIL = ?  where ERS_USERS_ID = ?;";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(6, ID);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setString(3, fname);
+			ps.setString(4, lname);
+			ps.setString(5, email);
+		
+				
+			success = ps.execute();	
+				 
+			
+		}catch(SQLException | IOException e) {
+			e.printStackTrace();
+		} 
+	if(success) {
+		return u;
+	}else {
+		return null;
+	}
+	}
+
+	@Override
 	public Users findUser(String username) {
 		Users u = null;
 		try(Connection con = ConnectionUtil.getConnectionFromFile()){

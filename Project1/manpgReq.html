@@ -20,15 +20,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link disabled" href="ManagerLogInPage.html">Home</a>
+              <a class="nav-link" href="ManagerLogInPage.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id='SeeUsers' href="manpgEmp.html">Employees</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='SeeRequests' href="manpgReq.html">Reimbursement Requests</a>
+                <a class="nav-link disabled" id='SeeRequests' href="manpgReq.html">Reimbursement Requests</a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" id="logOutButton" href="home.html">Log Out</a>
             </li>
@@ -37,14 +36,36 @@
          
         </div>
       </nav>
-      <main>
-      <div id = "welcome" class = "center"><h2>Welcome!</h2></div>
+   
       
-      <img src="https://cloudinary.hbs.edu/hbsit/image/upload/s--lud-A0qx--/f_auto,c_fill,h_375,w_750,/v20200101/9807A4BFE91B8A9177C3B960943AD858.jpg" class="center">
-    </main>
-    
+      <form>
+        
+        <button type="button" id="SeeRequests">View All Requests</button>
+        <button type="button" id="SeePendingRequests">View All Request Waiting For Review</button>
+        <button type="button" id="SeeApprovedRequests">View All Approved Requests</button>
+        <button type="button" id="SeeDeniedRequests">View All Denied Requests</button>
+        <br>
+        <input type="number" name='Users ID' id="UserId">
+        <input type="button" value = "See Employee's Transactions" id = "searchEmp">
+       
+        <br><br>
+        <input type="number" name='Req ID' id="reqId">
+
+        <input type="button" value = "Approve Request #" id = "approvereq">
+        <input type="button" value = "Deny Request #" id = "denyreq">
+       
+      </form>
+
+      <main>
+        <div id="alltable"></div>  
+        <div id="pendingtable"></div>  
+        <div id="approvedtable"></div>
+        <div id="deniedtable"></div>
+        <div id="employeetable"></div>
+        <div id="error-div"></div>
+      </main>
       <script src = "loggedIn.js"></script>
-      <script src = "managerpage.js"></script>
+      <script src = "ManPgReq.js"></script>
 
 </body>
 </html>

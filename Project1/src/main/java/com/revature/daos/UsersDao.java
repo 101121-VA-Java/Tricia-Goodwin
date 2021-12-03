@@ -13,5 +13,6 @@ public interface UsersDao {
 	Role userRole(String username);
 	//List<Users> getUsersManId(int Id);
 	Users addUser(int ID, String fname, String lname, String username, String password, String email, String role);
+	Users updateUser(int ID, String fname, String lname, String username, String password, String email);
 	
 }

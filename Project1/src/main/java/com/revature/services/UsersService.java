@@ -33,6 +33,16 @@ public class UsersService {
 		Users user = ud.findUser(id);
 		return user;
 	}
+	
+//	public Users updateUser(int ID, String fname, String lname,String username, String password, String email) {
+//		Users user = ud.updateUser(ID, fname, lname, username, password, email);
+//		return user;
+//	}
+
+	public Users updateUser(int id, String fname, String lname, String username, String pass, String email) {
+		Users user = ud.updateUser(id, fname, lname, username, pass, email);
+		return user;
+	}
 
 	
 //	public List<Users> getUsersmanId(){

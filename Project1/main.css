@@ -8,6 +8,7 @@ main {
     background-color: white;
     padding: 20px;
     border-radius: 20px;
+    margin: 20px;
 }
 nav {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -28,4 +29,25 @@ table {
   
   tr:nth-child(even) {
     background-color: #dddddd;
+  }
+
+
+form{
+    padding:1.5em;
+    margin:1em;
+}
+.buttons { 
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+  }
+  .buttons button { 
+    width: 100%;
+  }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
   }

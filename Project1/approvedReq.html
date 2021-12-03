@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link disabled" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="loggedInPage.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../newReimbursement.html">New Reimbursement</a>
@@ -29,7 +29,7 @@
                 <a class="nav-link" id='pendingreq' href="pendingReq.html">View Pending Requests</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='approvedreq' href="#">View Approved Requests</a>
+                <a class="nav-link disabled" id='approvedreq' href="#">View Approved Requests</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id='allreq' href="allReq.html">See All My Requests</a>
@@ -45,13 +45,15 @@
          
         </div>
       </nav>
-    <main>
-      <div id = "welcome" class = "center"><h2>Welcome!</h2></div>
-      
-      <img src="https://cloudinary.hbs.edu/hbsit/image/upload/s--lud-A0qx--/f_auto,c_fill,h_375,w_750,/v20200101/9807A4BFE91B8A9177C3B960943AD858.jpg" class="center">
-    </main>
+   
+     <main>
+      <h2> Approved Requests</h2>
+      <div id = "approved">You Currently Have No Approved Reimbursement Requests</div>
+      <div id="approvedtable"></div>
+     </main>
 
       <!--<script src = "loggedIn.js"></script> -->
       <script src = "employeepage.js"></script>
+      <script src = "employeeReq.js"></script>
 </body>
 </html>
