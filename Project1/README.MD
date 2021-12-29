@@ -19,21 +19,31 @@ Technologies Used
 Features
 --
 -Users can log in and submit new reimbursement requests
+
 -Users can view their previous requests by pending, approved, and rejected
+
 -Managers can log in and view all employees
+
 -Managers can see all pending requests and choose to approve or deny requests
+
 
 To-do list:
 
 -Improve user interface aesthetics
+
 -Add admin capable of updating user roles and information
 
 Getting Started
 --
 -git clone https://github.com/101121-VA-Java/Tricia-Goodwin.git
+
 -Only project 1 file is needed.
+
 -Open folder in IDE of your choice capable of running Java. 
+
 -Start  project by running the driver file in the com.revature.drivers package
+
 -Open home.html file using a live server
+
 -Use postgres file to create database structure 
 
